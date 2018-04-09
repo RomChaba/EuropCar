@@ -13,17 +13,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.ConnexionActivity">
+
+        </activity>
+        <activity android:name=".activity.InscriptionActivity" />
+        <activity android:name=".activity.ParametresAgenceActivity" />
+        <activity android:name=".ListeVehiculeActivity"></activity>
+        <activity android:name=".activity.LocationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.InscriptionActivity" />
-        <activity android:name=".activity.ParametresAgenceActivity"></activity>
-        <activity android:name=".activity.InscriptionActivity" />
-        <activity android:name=".ListeVehiculeActivity">
-
         </activity>
     </application>
 
