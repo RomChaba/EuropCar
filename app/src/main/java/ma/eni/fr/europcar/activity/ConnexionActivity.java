@@ -1,5 +1,6 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -28,5 +29,20 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
 
         this.connexionFragment = ((ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion));
         this.connexionFragment.setTypeAffichage(TypeAffichage.CONNEXION);
+    }
+
+    @Override
+    public void redirectionVersInscription(){
+        Intent intent = new Intent(ConnexionActivity.this,InscriptionActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void connexionValider(){
+
+    }
+    @Override
+    public void inscriptionValider(){
+
     }
 }
