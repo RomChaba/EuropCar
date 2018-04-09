@@ -6,12 +6,25 @@ import android.os.Bundle;
 import ma.eni.fr.europcar.ConnexionFragment;
 import ma.eni.fr.europcar.R;
 
+import static ma.eni.fr.europcar.R.id.fragment_connexion;
+
 public class ConnexionActivity extends AppCompatActivity implements ConnexionFragment.ConnexionListener
 {
+    ConnexionFragment connexionFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_connexion);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        this.connexionFragment = ((ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion));
     }
 }
