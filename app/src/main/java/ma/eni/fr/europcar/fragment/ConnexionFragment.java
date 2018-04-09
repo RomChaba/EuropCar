@@ -11,8 +11,7 @@ import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeAffichage;
-import ma.eni.fr.europcar.model.Utilisateur;
-import ma.eni.fr.europcar.utils.OutilsFormulaire;
+import ma.eni.fr.europcar.utils.OF;
 
 public class ConnexionFragment extends Fragment
 {
@@ -81,12 +80,12 @@ public class ConnexionFragment extends Fragment
             {
                 boolean erreur = false;
 
-                if(OutilsFormulaire.isEditTextEmpty(email))
+                if(OF.isEditTextEmpty(email))
                 {
                     email.setError("Veuillez renseigner votre adresse email");
                     erreur = true;
                 }
-                if(OutilsFormulaire.isEditTextEmpty(mot_de_passe))
+                if(OF.isEditTextEmpty(mot_de_passe))
                 {
                     mot_de_passe.setError("Veuillez renseigner votre mot de passe");
                     erreur = true;
@@ -96,7 +95,7 @@ public class ConnexionFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.connexionValider(OutilsFormulaire.getTextFromEditText(email), OutilsFormulaire.getTextFromEditText(mot_de_passe));
+                        mListener.connexionValider(OF.getTextFromEditText(email), OF.getTextFromEditText(mot_de_passe));
                     }
                 }
             }
@@ -109,24 +108,24 @@ public class ConnexionFragment extends Fragment
             {
                 boolean erreur = false;
 
-                if(OutilsFormulaire.isEditTextEmpty(email))
+                if(OF.isEditTextEmpty(email))
                 {
                     email.setError("Veuillez renseigner votre adresse email");
                     erreur = true;
                 }
-                if(OutilsFormulaire.isEditTextEmpty(mot_de_passe))
+                if(OF.isEditTextEmpty(mot_de_passe))
                 {
                     mot_de_passe.setError("Veuillez renseigner votre mot de passe");
                     erreur = true;
                 }
-                if(OutilsFormulaire.isEditTextEmpty(mot_de_passe2))
+                if(OF.isEditTextEmpty(mot_de_passe2))
                 {
                     mot_de_passe2.setError("Veuillez confirmer votre mot de passe");
                     erreur = true;
                 }
                 else
                 {
-                    if(OutilsFormulaire.getTextFromEditText(mot_de_passe).equals(OutilsFormulaire.getTextFromEditText(mot_de_passe2)))
+                    if(!OF.getTextFromEditText(mot_de_passe).equals(OF.getTextFromEditText(mot_de_passe2)))
                     {
                         mot_de_passe2.setError("La confirmation du mot de passe n'est pas correcte");
                         erreur = true;
@@ -137,7 +136,7 @@ public class ConnexionFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.inscriptionValider(OutilsFormulaire.getTextFromEditText(email), OutilsFormulaire.getTextFromEditText(mot_de_passe));
+                        mListener.inscriptionValider(OF.getTextFromEditText(email), OF.getTextFromEditText(mot_de_passe));
                     }
                 }
             }

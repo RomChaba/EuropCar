@@ -8,31 +8,31 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Raison sociale"
+        android:hint="@string/raison_sociale"
         android:id="@+id/parametres_agence_raison_sociale" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="SIRET"
+        android:hint="@string/siret"
         android:id="@+id/parametres_agence_siret" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Voie"
+        android:hint="@string/voie"
         android:id="@+id/parametres_agence_voie" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="SIRET"
+        android:hint="@string/code_postal"
         android:id="@+id/parametres_agence_code_postal" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="SIRET"
+        android:hint="@string/ville"
         android:id="@+id/parametres_agence_ville" />
 
     <LinearLayout
@@ -44,7 +44,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modifier"
+            android:text="@string/modifier"
             android:id="@+id/parametres_agence_modifier" />
 
     </LinearLayout>
