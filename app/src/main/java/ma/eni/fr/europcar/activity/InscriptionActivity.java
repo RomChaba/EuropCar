@@ -24,4 +24,19 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
         fragment.setTypeAffichage(TypeAffichage.INSCRIPTION);
 
     }
+
+    @Override
+    public void redirectionVersInscription() {
+
+    }
+
+    @Override
+    public void connexionValider() {
+
+    }
+
+    @Override
+    public void inscriptionValider() {
+
+    }
 }

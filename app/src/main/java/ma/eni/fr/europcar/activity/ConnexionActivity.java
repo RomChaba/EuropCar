@@ -29,4 +29,22 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         this.connexionFragment = ((ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion));
         this.connexionFragment.setTypeAffichage(TypeAffichage.CONNEXION);
     }
+
+    @Override
+    public void redirectionVersInscription()
+    {
+
+    }
+
+    @Override
+    public void connexionValider()
+    {
+
+    }
+
+    @Override
+    public void inscriptionValider()
+    {
+
+    }
 }

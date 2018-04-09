@@ -61,6 +61,27 @@ public class ConnexionFragment extends Fragment
         this.inscription = view.findViewById(R.id.connexion_inscription);
         this.s_inscrire = view.findViewById(R.id.connexion_s_inscrire);
 
+        this.inscription.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(mListener != null)
+                {
+                    mListener.redirectionVersInscription();
+                }
+            }
+        });
+
+        this.se_connecter.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+            }
+        });
+
         return view;
     }
 
@@ -82,6 +103,7 @@ public class ConnexionFragment extends Fragment
     public void setTypeAffichage(TypeAffichage typeAffichage)
     {
         this.typeAffichage = typeAffichage;
+
         if(typeAffichage != null)
         {
             if(TypeAffichage.CONNEXION == typeAffichage)
@@ -107,6 +129,10 @@ public class ConnexionFragment extends Fragment
 
     public interface ConnexionListener
     {
+        void redirectionVersInscription();
 
+        void connexionValider();
+
+        void inscriptionValider();
     }
 }
