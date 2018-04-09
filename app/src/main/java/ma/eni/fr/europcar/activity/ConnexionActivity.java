@@ -31,20 +31,17 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     }
 
     @Override
-    public void redirectionVersInscription()
-    {
-
+    public void redirectionVersInscription(){
+        Intent intent = new Intent(ConnexionActivity.this,InscriptionActivity.class);
+        startActivity(intent);
     }
 
     @Override
-    public void connexionValider()
-    {
+    public void connexionValider(){
 
     }
-
     @Override
-    public void inscriptionValider()
-    {
+    public void inscriptionValider(){
 
     }
 }
