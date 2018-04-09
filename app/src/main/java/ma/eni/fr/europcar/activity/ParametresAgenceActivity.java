@@ -1,5 +1,6 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.ConnexionFragment;
 import ma.eni.fr.europcar.fragment.ParametresAgenceFragment;
+import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.service.AgenceService;
 import ma.eni.fr.europcar.service.UtilisateurService;
 
@@ -44,6 +46,8 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         else
         {
             Toast.makeText(this, "Informations enregistrées", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ParametresAgenceActivity.this, LocationActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -54,6 +54,8 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         else
         {
             Toast.makeText(this, "Connexion...", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ConnexionActivity.this, LocationActivity.class);
+            startActivity(intent);
         }
     }
 

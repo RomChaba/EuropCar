@@ -24,6 +24,9 @@
         <activity android:name=".activity.ListeVehiculeActivity">
 
         </activity>
+        <activity android:name=".activity.LocationActivity">
+
+        </activity>
     </application>
 
 </manifest>
