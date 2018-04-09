@@ -6,22 +6,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ConnexionListener} interface
- * to handle interaction events.
- * Use the {@link ConnexionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ConnexionFragment extends Fragment
 {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private ConnexionListener mListener;
+
+    private EditText email;
+    private EditText mot_de_passe;
+    private EditText mot_de_passe2;
+    private Button se_connecter;
+    private Button inscription;
+    private Button s_inscrire;
 
     public ConnexionFragment()
     {
@@ -48,6 +48,13 @@ public class ConnexionFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_connexion, container, false);
+
+        this.email = view.findViewById(R.id.connexion_email);
+        this.mot_de_passe = view.findViewById(R.id.connexion_mot_de_passe);
+        this.mot_de_passe2 = view.findViewById(R.id.connexion_mot_de_passe_2);
+        this.se_connecter = view.findViewById(R.id.connexion_se_connecter);
+        this.inscription = view.findViewById(R.id.connexion_inscription);
+        this.s_inscrire = view.findViewById(R.id.connexion_s_inscrire);
 
         return view;
     }

@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="S'inscrire"
-            android:id="@+id/connexion_sinscrire" />
+            android:id="@+id/connexion_s_inscrire" />
 
     </LinearLayout>
 
