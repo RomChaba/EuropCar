@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeAffichage;
+import ma.eni.fr.europcar.model.Utilisateur;
+import ma.eni.fr.europcar.utils.OutilsFormulaire;
 
 public class ConnexionFragment extends Fragment
 {
@@ -77,13 +79,66 @@ public class ConnexionFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                if(email != null && email.getText().toString().trim().isEmpty())
+                boolean erreur = false;
+
+                if(OutilsFormulaire.isEditTextEmpty(email))
                 {
                     email.setError("Veuillez renseigner votre adresse email");
+                    erreur = true;
                 }
-                if(mot_de_passe != null && mot_de_passe.getText().toString().trim().isEmpty())
+                if(OutilsFormulaire.isEditTextEmpty(mot_de_passe))
                 {
                     mot_de_passe.setError("Veuillez renseigner votre mot de passe");
+                    erreur = true;
+                }
+
+                if(!erreur)
+                {
+                    if(mListener != null)
+                    {
+                        mListener.connexionValider(OutilsFormulaire.getTextFromEditText(email), OutilsFormulaire.getTextFromEditText(mot_de_passe));
+                    }
+                }
+            }
+        });
+
+        this.s_inscrire.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                boolean erreur = false;
+
+                if(OutilsFormulaire.isEditTextEmpty(email))
+                {
+                    email.setError("Veuillez renseigner votre adresse email");
+                    erreur = true;
+                }
+                if(OutilsFormulaire.isEditTextEmpty(mot_de_passe))
+                {
+                    mot_de_passe.setError("Veuillez renseigner votre mot de passe");
+                    erreur = true;
+                }
+                if(OutilsFormulaire.isEditTextEmpty(mot_de_passe2))
+                {
+                    mot_de_passe2.setError("Veuillez confirmer votre mot de passe");
+                    erreur = true;
+                }
+                else
+                {
+                    if(OutilsFormulaire.getTextFromEditText(mot_de_passe).equals(OutilsFormulaire.getTextFromEditText(mot_de_passe2)))
+                    {
+                        mot_de_passe2.setError("La confirmation du mot de passe n'est pas correcte");
+                        erreur = true;
+                    }
+                }
+
+                if(!erreur)
+                {
+                    if(mListener != null)
+                    {
+                        mListener.inscriptionValider(OutilsFormulaire.getTextFromEditText(email), OutilsFormulaire.getTextFromEditText(mot_de_passe));
+                    }
                 }
             }
         });
@@ -110,18 +165,15 @@ public class ConnexionFragment extends Fragment
     {
         this.typeAffichage = typeAffichage;
 
-        if(typeAffichage != null)
+        if(TypeAffichage.CONNEXION.equals(typeAffichage))
         {
-            if(TypeAffichage.CONNEXION == typeAffichage)
-            {
-                this.mot_de_passe2.setVisibility(View.GONE);
-                this.s_inscrire.setVisibility(View.GONE);
-            }
-            else if(TypeAffichage.INSCRIPTION == typeAffichage)
-            {
-                this.se_connecter.setVisibility(View.GONE);
-                this.inscription.setVisibility(View.GONE);
-            }
+            this.mot_de_passe2.setVisibility(View.GONE);
+            this.s_inscrire.setVisibility(View.GONE);
+        }
+        else if(TypeAffichage.INSCRIPTION.equals(typeAffichage))
+        {
+            this.se_connecter.setVisibility(View.GONE);
+            this.inscription.setVisibility(View.GONE);
         }
     }
 
@@ -137,8 +189,8 @@ public class ConnexionFragment extends Fragment
     {
         void redirectionVersInscription();
 
-        void connexionValider();
+        void connexionValider(String email, String motDePasse);
 
-        void inscriptionValider();
+        void inscriptionValider(String email, String motDePasse);
     }
 }

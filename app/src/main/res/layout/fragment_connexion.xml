@@ -5,29 +5,24 @@
     android:orientation="vertical"
     tools:context="ma.eni.fr.europcar.fragment.ConnexionFragment">
 
-    <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="EuropCar"
-    style="@style/EuropCarTitre"
-    android:textAlignment="center" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Adresse email"
+        android:hint="@string/email"
         android:id="@+id/connexion_email" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mot de passe"
+        android:hint="@string/mot_de_passe"
+        android:inputType="textPassword"
         android:id="@+id/connexion_mot_de_passe" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirmer mot de passe"
+        android:inputType="textPassword"
+        android:hint="@string/mot_de_passe2"
         android:id="@+id/connexion_mot_de_passe_2" />
 
     <LinearLayout
