@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import ma.eni.fr.europcar.ConnexionFragment;
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.enums.TypeAffichage;
 
 public class InscriptionActivity extends AppCompatActivity implements ConnexionFragment.ConnexionListener{
     ConnexionFragment fragment;
