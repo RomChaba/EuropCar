@@ -34,19 +34,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Se connecter"
+            android:text="@string/se_connecter"
             android:id="@+id/connexion_se_connecter" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Inscription"
+            android:text="@string/inscription"
             android:id="@+id/connexion_inscription" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="S'inscrire"
+            android:text="@string/s_inscrire"
             android:id="@+id/connexion_s_inscrire" />
 
     </LinearLayout>

@@ -57,12 +57,12 @@ public class Agence
         this.raisonSociale = raisonSociale;
     }
 
-    public String getSIRET()
+    public String getSiret()
     {
         return siret;
     }
 
-    public void setSIRET(String siret)
+    public void setSiret(String siret)
     {
         this.siret = siret;
     }

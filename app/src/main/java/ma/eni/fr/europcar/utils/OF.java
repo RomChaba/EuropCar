@@ -6,7 +6,7 @@ import android.widget.EditText;
  * Created by Administrateur on 09/04/2018.
  */
 
-public class OutilsFormulaire
+public class OF
 {
     public static boolean isEditTextEmpty(EditText editText)
     {

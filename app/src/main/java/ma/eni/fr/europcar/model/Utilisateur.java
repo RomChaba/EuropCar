@@ -9,6 +9,7 @@ public class Utilisateur
     private int id;
     private String email;
     private String motDePasse;
+    private Agence agence;
 
     public Utilisateur()
     {
@@ -56,5 +57,15 @@ public class Utilisateur
     public void setMotDePasse(String motDePasse)
     {
         this.motDePasse = motDePasse;
+    }
+
+    public Agence getAgence()
+    {
+        return agence;
+    }
+
+    public void setAgence(Agence agence)
+    {
+        this.agence = agence;
     }
 }
