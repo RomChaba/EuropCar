@@ -29,6 +29,19 @@ public class LocationService
         return locationList ;
     }
 
+    public Location getLocationAvecId(int id)
+    {
+        for (Location location : this.locationList)
+        {
+            if(location.getId() == id)
+            {
+                return location;
+            }
+        }
+
+        return null;
+    }
+
     public void louer(Vehicule vehicule, Agence agence)
     {
     }
@@ -42,6 +55,7 @@ public class LocationService
                 vehiculeList) {
             //Location(int id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule)
             locationList.add(new Location(compt,new Date(),new Date(2019,2,2),150f,test));
+            compt++;
         }
 
     }
