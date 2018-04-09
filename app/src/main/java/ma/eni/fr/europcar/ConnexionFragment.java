@@ -82,15 +82,18 @@ public class ConnexionFragment extends Fragment
     public void setTypeAffichage(TypeAffichage typeAffichage)
     {
         this.typeAffichage = typeAffichage;
-        if(TypeAffichage.CONNEXION.equals(typeAffichage.name()))
+        if(typeAffichage != null)
         {
-            this.mot_de_passe2.setVisibility(View.GONE);
-            this.s_inscrire.setVisibility(View.GONE);
-        }
-        else if(TypeAffichage.INSCRIPTION.equals(typeAffichage.name()))
-        {
-            this.se_connecter.setVisibility(View.GONE);
-            this.inscription.setVisibility(View.GONE);
+            if(TypeAffichage.CONNEXION == typeAffichage)
+            {
+                this.mot_de_passe2.setVisibility(View.GONE);
+                this.s_inscrire.setVisibility(View.GONE);
+            }
+            else if(TypeAffichage.INSCRIPTION == typeAffichage)
+            {
+                this.se_connecter.setVisibility(View.GONE);
+                this.inscription.setVisibility(View.GONE);
+            }
         }
     }
 
