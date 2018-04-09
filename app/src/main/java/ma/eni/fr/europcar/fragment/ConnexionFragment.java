@@ -1,4 +1,4 @@
-package ma.eni.fr.europcar;
+package ma.eni.fr.europcar.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.lang.reflect.Type;
-
+import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeAffichage;
 
 public class ConnexionFragment extends Fragment
@@ -78,7 +77,14 @@ public class ConnexionFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-
+                if(email != null && email.getText().toString().trim().isEmpty())
+                {
+                    email.setError("Veuillez renseigner votre adresse email");
+                }
+                if(mot_de_passe != null && mot_de_passe.getText().toString().trim().isEmpty())
+                {
+                    mot_de_passe.setError("Veuillez renseigner votre mot de passe");
+                }
             }
         });
 

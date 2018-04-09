@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ma.eni.fr.europcar.ConnexionFragment">
+    tools:context="ma.eni.fr.europcar.fragment.ConnexionFragment">
 
     <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="EuropCar"
-    style="@style/Base.TextAppearance.AppCompat.Title"
+    style="@style/EuropCarTitre"
     android:textAlignment="center" />
 
     <EditText

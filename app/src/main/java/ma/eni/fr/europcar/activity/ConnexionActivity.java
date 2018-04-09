@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import ma.eni.fr.europcar.ConnexionFragment;
+import ma.eni.fr.europcar.fragment.ConnexionFragment;
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeAffichage;
-
-import static ma.eni.fr.europcar.R.id.fragment_connexion;
 
 public class ConnexionActivity extends AppCompatActivity implements ConnexionFragment.ConnexionListener
 {
