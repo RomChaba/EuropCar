@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".activity.InscriptionActivity" />
         <activity android:name=".activity.ParametresAgenceActivity"></activity>
-        <activity android:name=".ListeVehiculeActivity">
+        <activity android:name=".activity.ListeVehiculeActivity">
 
         </activity>
     </application>

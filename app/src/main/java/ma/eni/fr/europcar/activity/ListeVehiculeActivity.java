@@ -1,8 +1,9 @@
-package ma.eni.fr.europcar;
+package ma.eni.fr.europcar.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.VehiculeFragment;
 import ma.eni.fr.europcar.service.VehiculeService;
 
