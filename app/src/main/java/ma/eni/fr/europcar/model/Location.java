@@ -5,4 +5,5 @@ package ma.eni.fr.europcar.model;
  */
 
 public class Location {
+
 }
