@@ -3,10 +3,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <fragment
-        android:id="@+id/fragment_location"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        class="ma.eni.fr.europcar.fragment.LocationFragment">
-    </fragment>
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/fragment_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="ma.eni.fr.europcar.fragment.LocationFragment">
+        </fragment>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_nouvelle_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_add_black_24dp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>
