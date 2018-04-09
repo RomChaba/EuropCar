@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.lang.reflect.Type;
+
+import ma.eni.fr.europcar.enums.TypeAffichage;
+
 public class ConnexionFragment extends Fragment
 {
     private static final String ARG_PARAM1 = "param1";
@@ -22,6 +26,7 @@ public class ConnexionFragment extends Fragment
     private Button se_connecter;
     private Button inscription;
     private Button s_inscrire;
+    private TypeAffichage typeAffichage;
 
     public ConnexionFragment()
     {
@@ -71,6 +76,21 @@ public class ConnexionFragment extends Fragment
         else
         {
             throw new RuntimeException(context.toString() + " must implement ConnexionListener");
+        }
+    }
+
+    public void setTypeAffichage(TypeAffichage typeAffichage)
+    {
+        this.typeAffichage = typeAffichage;
+        if(TypeAffichage.CONNEXION.equals(typeAffichage.name()))
+        {
+            this.mot_de_passe2.setVisibility(View.GONE);
+            this.s_inscrire.setVisibility(View.GONE);
+        }
+        else if(TypeAffichage.INSCRIPTION.equals(typeAffichage.name()))
+        {
+            this.se_connecter.setVisibility(View.GONE);
+            this.inscription.setVisibility(View.GONE);
         }
     }
 
