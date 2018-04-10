@@ -11,6 +11,7 @@ import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeAffichage;
 import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.service.UtilisateurService;
+import ma.eni.fr.europcar.utils.OF;
 
 public class ConnexionActivity extends AppCompatActivity implements ConnexionFragment.ConnexionListener
 {
@@ -43,13 +44,13 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     }
 
     @Override
-    public void connexionValider(String email, String motDePasse)
+    public void connexionValider(Utilisateur utilisateur)
     {
-        TypeErreur resultat = this.utilisateurService.getInstance().connexion(email, motDePasse);
+        TypeErreur resultat = this.utilisateurService.getInstance().connexion(utilisateur);
 
         if(!TypeErreur.OK.equals(resultat))
         {
-            Toast.makeText(this, resultat.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, OF.getStringByName(this, resultat.name()), Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -60,7 +61,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     }
 
     @Override
-    public void inscriptionValider(String email, String motDePasse)
+    public void inscriptionValider(Utilisateur utilisateur)
     {
 
     }

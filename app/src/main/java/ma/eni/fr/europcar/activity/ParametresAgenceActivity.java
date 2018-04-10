@@ -9,9 +9,11 @@ import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.ConnexionFragment;
 import ma.eni.fr.europcar.fragment.ParametresAgenceFragment;
+import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.service.AgenceService;
 import ma.eni.fr.europcar.service.UtilisateurService;
+import ma.eni.fr.europcar.utils.OF;
 
 public class ParametresAgenceActivity extends AppCompatActivity implements ParametresAgenceFragment.ParametresListener
 {
@@ -35,13 +37,13 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
     }
 
     @Override
-    public void parametresAgenceValide(String raisonSociale, String siret, String voie, String codePostal, String ville)
+    public void parametresAgenceValide(Agence agence)
     {
-        TypeErreur resultat = this.agenceService.ajouter(raisonSociale, siret, voie, codePostal, ville);
+        TypeErreur resultat = this.agenceService.ajouter(agence);
 
         if(!TypeErreur.OK.equals(resultat))
         {
-            Toast.makeText(this, resultat.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, OF.getStringByName(this, resultat.name()), Toast.LENGTH_LONG).show();
         }
         else
         {

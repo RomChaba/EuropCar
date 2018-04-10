@@ -31,15 +31,15 @@ public class AgenceService
         return this.instance;
     }
 
-    public TypeErreur ajouter(String raisonSociale, String siret, String voie, String codePostal, String ville)
+    public TypeErreur ajouter(Agence agence)
     {
-        if(getAgenceAvecSiret(siret) != null)
+        if(getAgenceAvecSiret(agence.getSiret()) != null)
         {
-            return TypeErreur.EMAIL_EXISTE_DEJA;
+            return TypeErreur.SIRET_EXISTE_DEJA;
         }
         else
         {
-            this.agences.add(new Agence(raisonSociale, siret, voie, Integer.parseInt(codePostal), ville));
+            this.agences.add(agence);
         }
 
         return TypeErreur.OK;

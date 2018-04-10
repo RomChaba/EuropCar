@@ -1,7 +1,7 @@
 package ma.eni.fr.europcar.dao;
 
 import ma.eni.fr.europcar.model.Location;
-import ma.eni.fr.europcar.model.Rendu;
+import ma.eni.fr.europcar.model.Retour;
 
 /**
  * Created by Administrateur on 09/04/2018.
@@ -16,7 +16,7 @@ public class LocationSQL implements ILocationDAO
     }
 
     @Override
-    public boolean rendre(Rendu rendu)
+    public boolean rendre(Retour rendu)
     {
         return false;
     }

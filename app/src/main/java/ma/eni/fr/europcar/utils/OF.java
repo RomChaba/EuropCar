@@ -1,5 +1,6 @@
 package ma.eni.fr.europcar.utils;
 
+import android.content.Context;
 import android.widget.EditText;
 
 /**
@@ -18,5 +19,8 @@ public class OF
         return (editText != null ? editText.getText().toString().trim() : "");
     }
 
-
+    public static int getStringByName(Context context, String name)
+    {
+        return context.getResources().getIdentifier(name, "string", context.getPackageName());
+    }
 }

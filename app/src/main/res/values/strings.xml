@@ -17,4 +17,15 @@
     <string name="plein_fait">Le plein est fait</string>
     <string name="kms">Nombre de kilomètres</string>
     <string name="rendre">Rendre</string>
+    <string name="ajouter_photo">Ajouter une photo</string>
+
+    <!-- Erreurs -->
+    <string name="EMAIL_EXISTE_DEJA">Cette adresse email est déjà utilisée par un autre utilisateur</string>
+    <string name="EMAIL_EXISTE_PAS">Cette adresse email n\'existe pas</string>
+    <string name="MOT_DE_PASSE_INCORRECT">Le mot de passe est incorrect.</string>
+    <string name="SIRET_EXISTE_DEJA">Ce numéro de SIRET est déjà enregistré.</string>
+    <string name="LOCATION_DEJA_RENDU">La location a déjà été rendue.</string>
+
+    <!-- Retour de location -->
+    <string name="EST_ENDOMMAGEE">Veuillez renseigner si la voiture a été endommagée ou non</string>
 </resources>

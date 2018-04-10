@@ -1,6 +1,7 @@
 package ma.eni.fr.europcar.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.utils.OF;
 
 public class ParametresAgenceFragment extends Fragment
@@ -137,7 +139,13 @@ public class ParametresAgenceFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.parametresAgenceValide(OF.getTextFromEditText(raisonSociale), OF.getTextFromEditText(siret), OF.getTextFromEditText(voie), OF.getTextFromEditText(codePostal), OF.getTextFromEditText(ville));
+                        Agence agence = new Agence();
+                        agence.setRaisonSociale(OF.getTextFromEditText(raisonSociale));
+                        agence.setSiret(OF.getTextFromEditText(siret));
+                        agence.setVoie(OF.getTextFromEditText(voie));
+                        agence.setCodePostal(Integer.parseInt(OF.getTextFromEditText(codePostal)));
+                        agence.setVille(OF.getTextFromEditText(ville));
+                        mListener.parametresAgenceValide(agence);
                     }
                 }
             }
@@ -171,6 +179,6 @@ public class ParametresAgenceFragment extends Fragment
 
     public interface ParametresListener
     {
-        void parametresAgenceValide(String raisonSociale, String siret, String voie, String codePostal, String ville);
+        void parametresAgenceValide(Agence agence);
     }
 }

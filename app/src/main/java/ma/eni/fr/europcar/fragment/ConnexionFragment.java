@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.enums.TypeAffichage;
+import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.utils.OF;
 
 public class ConnexionFragment extends Fragment
@@ -95,7 +96,10 @@ public class ConnexionFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.connexionValider(OF.getTextFromEditText(email), OF.getTextFromEditText(mot_de_passe));
+                        Utilisateur utilisateur = new Utilisateur();
+                        utilisateur.setEmail(OF.getTextFromEditText(email));
+                        utilisateur.setMotDePasse(OF.getTextFromEditText(mot_de_passe));
+                        mListener.connexionValider(utilisateur);
                     }
                 }
             }
@@ -136,7 +140,10 @@ public class ConnexionFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.inscriptionValider(OF.getTextFromEditText(email), OF.getTextFromEditText(mot_de_passe));
+                        Utilisateur utilisateur = new Utilisateur();
+                        utilisateur.setEmail(OF.getTextFromEditText(email));
+                        utilisateur.setMotDePasse(OF.getTextFromEditText(mot_de_passe));
+                        mListener.inscriptionValider(utilisateur);
                     }
                 }
             }
@@ -188,8 +195,8 @@ public class ConnexionFragment extends Fragment
     {
         void redirectionVersInscription();
 
-        void connexionValider(String email, String motDePasse);
+        void connexionValider(Utilisateur utilisateur);
 
-        void inscriptionValider(String email, String motDePasse);
+        void inscriptionValider(Utilisateur utilisateur);
     }
 }

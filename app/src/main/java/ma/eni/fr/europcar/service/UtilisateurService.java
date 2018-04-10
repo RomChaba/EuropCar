@@ -31,26 +31,26 @@ public class UtilisateurService
         return this.instance;
     }
 
-    public TypeErreur inscription(String email, String motDePasse)
+    public TypeErreur inscription(Utilisateur utilisateur)
     {
-        if(getUtilisateurAvecEmail(email) != null)
+        if(getUtilisateurAvecEmail(utilisateur.getEmail()) != null)
         {
             return TypeErreur.EMAIL_EXISTE_DEJA;
         }
         else
         {
-            this.utilisateurs.add(new Utilisateur(email, motDePasse));
+            this.utilisateurs.add(utilisateur);
         }
 
         return TypeErreur.OK;
     }
 
-    public TypeErreur connexion(String email, String motDePasse)
+    public TypeErreur connexion(Utilisateur utilisateur)
     {
-        Utilisateur utilisateur = getUtilisateurAvecEmail(email);
+        Utilisateur utilisateur2 = getUtilisateurAvecEmail(utilisateur.getEmail());
         if(utilisateur != null)
         {
-            if(!utilisateur.getMotDePasse().equals(motDePasse))
+            if(!utilisateur.getMotDePasse().equals(utilisateur2.getMotDePasse()))
             {
                 return TypeErreur.MOT_DE_PASSE_INCORRECT;
             }
