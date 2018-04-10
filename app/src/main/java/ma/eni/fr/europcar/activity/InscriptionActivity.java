@@ -1,10 +1,13 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.ConnexionFragment;
 import ma.eni.fr.europcar.R;
@@ -50,16 +53,51 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
     @Override
     public void inscriptionValider(Utilisateur utilisateur)
     {
-        TypeErreur resultat = this.utilisateurService.getInstance().inscription(utilisateur);
+        InscriptionAsyncTask task = new InscriptionAsyncTask(this);
+        task.execute(utilisateur);
+    }
 
-        if(!TypeErreur.OK.equals(resultat))
+    private class InscriptionAsyncTask extends AsyncTask<Utilisateur, Void, Void>
+    {
+        private Context context;
+        private TypeErreur resultat;
+
+        public InscriptionAsyncTask(Context context)
         {
-            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_SHORT).show();
+            this.context = context;
         }
-        else
+
+        @Override
+        protected Void doInBackground(Utilisateur... utilisateurs)
         {
-            Intent intent = new Intent(InscriptionActivity.this, ParametresAgenceActivity.class);
-            startActivity(intent);
+            this.resultat = utilisateurService.getInstance().inscription(utilisateurs[0]);
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values)
+        {
+            super.onProgressUpdate(values);
+
+            Toast.makeText(context, OF.getStringByName(context, Message.INSCRIPTION), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            if(!TypeErreur.OK.equals(resultat))
+            {
+                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(context, OF.getStringByName(context, Message.INSCRIPTION_REUSSIE), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, ParametresAgenceActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

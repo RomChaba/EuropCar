@@ -1,6 +1,8 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -40,17 +42,49 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
     @Override
     public void parametresAgenceValide(Agence agence)
     {
-        TypeErreur resultat = this.agenceService.getInstance().ajouter(agence);
+        ParametresAgenceAsyncTask task = new ParametresAgenceAsyncTask(this);
+        task.execute(agence);
+    }
 
-        if(!TypeErreur.OK.equals(resultat))
+    private class ParametresAgenceAsyncTask extends AsyncTask<Agence, Void, Void>
+    {
+        private Context context;
+        private TypeErreur resultat;
+
+        public ParametresAgenceAsyncTask(Context context)
         {
-            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_LONG).show();
+            this.context = context;
         }
-        else
+
+        @Override
+        protected Void doInBackground(Agence... agences)
         {
-            Toast.makeText(this, OF.getStringByName(this, Message.PARAMETRES_AGENCE), Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(ParametresAgenceActivity.this, LocationActivity.class);
-            startActivity(intent);
+            this.resultat = agenceService.getInstance().ajouter(agences[0]);
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values)
+        {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            if(!TypeErreur.OK.equals(resultat))
+            {
+                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(context, OF.getStringByName(context, Message.PARAMETRES_AGENCE), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, LocationActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

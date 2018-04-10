@@ -40,6 +40,9 @@
 
     <!-- OK -->
     <string name="CONNEXION">Connexion...</string>
+    <string name="INSCRIPTION">Inscription...</string>
+    <string name="CONNEXION_REUSSIE">Connexion réussie</string>
+    <string name="INSCRIPTION_REUSSIE">Inscription réussie</string>
     <string name="PARAMETRES_AGENCE">Informations enregistrées</string>
     <string name="LOCATION_RENDUE">Location rendue</string>
 

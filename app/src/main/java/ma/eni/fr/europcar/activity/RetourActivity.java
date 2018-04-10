@@ -1,6 +1,8 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.RetourFragment;
 import ma.eni.fr.europcar.fragment.LocationFragment;
+import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.model.Retour;
 import ma.eni.fr.europcar.service.LocationService;
@@ -67,17 +70,49 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
     public void rendreLocation(Retour retour)
     {
         retour.setLocation(this.location);
-        TypeErreur resultat = this.retourService.getInstance().rendre(retour);
+        RetourAsyncTask task = new RetourAsyncTask(this);
+        task.execute(retour);
+    }
 
-        if(!TypeErreur.OK.equals(resultat))
+    private class RetourAsyncTask extends AsyncTask<Retour, Void, Void>
+    {
+        private Context context;
+        private TypeErreur resultat;
+
+        public RetourAsyncTask(Context context)
         {
-            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_LONG).show();
+            this.context = context;
         }
-        else
+
+        @Override
+        protected Void doInBackground(Retour... retours)
         {
-            Toast.makeText(this, OF.getStringByName(this, Message.LOCATION_RENDUE), Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(RetourActivity.this, LocationActivity.class);
-            startActivity(intent);
+            this.resultat = retourService.getInstance().rendre(retours[0]);
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values)
+        {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            if(!TypeErreur.OK.equals(resultat))
+            {
+                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(context, OF.getStringByName(context, Message.LOCATION_RENDUE), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RetourActivity.this, LocationActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }
