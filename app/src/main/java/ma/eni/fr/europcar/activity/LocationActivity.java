@@ -47,7 +47,7 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
     @Override
     public void afficherDetailLocation(Location location)
     {
-        Intent intent = new Intent(LocationActivity.this, RendreLocationActivity.class);
+        Intent intent = new Intent(LocationActivity.this, RetourActivity.class);
         intent.putExtra("idLocation", location.getId());
         startActivity(intent);
     }

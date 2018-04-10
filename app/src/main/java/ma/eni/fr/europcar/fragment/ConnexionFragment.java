@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeAffichage;
+import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.utils.OF;
 
 public class ConnexionFragment extends Fragment
@@ -23,6 +25,7 @@ public class ConnexionFragment extends Fragment
     private EditText email;
     private EditText mot_de_passe;
     private EditText mot_de_passe2;
+    private EditText token;
     private Button se_connecter;
     private Button inscription;
     private Button s_inscrire;
@@ -52,11 +55,12 @@ public class ConnexionFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_connexion, container, false);
+        final View view = inflater.inflate(R.layout.fragment_connexion, container, false);
 
         this.email = view.findViewById(R.id.connexion_email);
         this.mot_de_passe = view.findViewById(R.id.connexion_mot_de_passe);
         this.mot_de_passe2 = view.findViewById(R.id.connexion_mot_de_passe_2);
+        this.token = view.findViewById(R.id.connexion_token);
         this.se_connecter = view.findViewById(R.id.connexion_se_connecter);
         this.inscription = view.findViewById(R.id.connexion_inscription);
         this.s_inscrire = view.findViewById(R.id.connexion_s_inscrire);
@@ -82,12 +86,12 @@ public class ConnexionFragment extends Fragment
 
                 if(OF.isEditTextEmpty(email))
                 {
-                    email.setError("Veuillez renseigner votre adresse email");
+                    email.setError(OF.getStringByName(view, Message.EMAIL_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(OF.isEditTextEmpty(mot_de_passe))
                 {
-                    mot_de_passe.setError("Veuillez renseigner votre mot de passe");
+                    mot_de_passe.setError(OF.getStringByName(view, Message.MOT_DE_PASSE_NON_RENSEIGNE));
                     erreur = true;
                 }
 
@@ -95,7 +99,10 @@ public class ConnexionFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.connexionValider(OF.getTextFromEditText(email), OF.getTextFromEditText(mot_de_passe));
+                        Utilisateur utilisateur = new Utilisateur();
+                        utilisateur.setEmail(OF.getTextFromEditText(email));
+                        utilisateur.setMotDePasse(OF.getTextFromEditText(mot_de_passe));
+                        mListener.connexionValider(utilisateur);
                     }
                 }
             }
@@ -110,24 +117,29 @@ public class ConnexionFragment extends Fragment
 
                 if(OF.isEditTextEmpty(email))
                 {
-                    email.setError("Veuillez renseigner votre adresse email");
+                    email.setError(OF.getStringByName(view, Message.EMAIL_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(OF.isEditTextEmpty(mot_de_passe))
                 {
-                    mot_de_passe.setError("Veuillez renseigner votre mot de passe");
+                    mot_de_passe.setError(OF.getStringByName(view, Message.MOT_DE_PASSE_NON_RENSEIGNE));
+                    erreur = true;
+                }
+                if(OF.isEditTextEmpty(token))
+                {
+                    token.setError(OF.getStringByName(view, Message.TOKEN_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(OF.isEditTextEmpty(mot_de_passe2))
                 {
-                    mot_de_passe2.setError("Veuillez confirmer votre mot de passe");
+                    mot_de_passe2.setError(OF.getStringByName(view, Message.MOT_DE_PASSE_CONFIRMATION_NON_RENSEIGNE));
                     erreur = true;
                 }
                 else
                 {
                     if(!OF.getTextFromEditText(mot_de_passe).equals(OF.getTextFromEditText(mot_de_passe2)))
                     {
-                        mot_de_passe2.setError("La confirmation du mot de passe n'est pas correcte");
+                        mot_de_passe2.setError(OF.getStringByName(view, Message.MOT_DE_PASSE_CONFIRMATION_ERREUR));
                         erreur = true;
                     }
                 }
@@ -136,7 +148,10 @@ public class ConnexionFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.inscriptionValider(OF.getTextFromEditText(email), OF.getTextFromEditText(mot_de_passe));
+                        Utilisateur utilisateur = new Utilisateur();
+                        utilisateur.setEmail(OF.getTextFromEditText(email));
+                        utilisateur.setMotDePasse(OF.getTextFromEditText(mot_de_passe));
+                        mListener.inscriptionValider(utilisateur);
                     }
                 }
             }
@@ -168,6 +183,7 @@ public class ConnexionFragment extends Fragment
         {
             this.mot_de_passe2.setVisibility(View.GONE);
             this.s_inscrire.setVisibility(View.GONE);
+            this.token.setVisibility(View.GONE);
         }
         else if(TypeAffichage.INSCRIPTION.equals(typeAffichage))
         {
@@ -188,8 +204,8 @@ public class ConnexionFragment extends Fragment
     {
         void redirectionVersInscription();
 
-        void connexionValider(String email, String motDePasse);
+        void connexionValider(Utilisateur utilisateur);
 
-        void inscriptionValider(String email, String motDePasse);
+        void inscriptionValider(Utilisateur utilisateur);
     }
 }

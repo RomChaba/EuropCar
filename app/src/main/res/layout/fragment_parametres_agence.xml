@@ -15,6 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/siret"
+        android:inputType="number"
+        android:maxLength="14"
         android:id="@+id/parametres_agence_siret" />
 
     <EditText
@@ -27,6 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/code_postal"
+        android:inputType="number"
+        android:maxLength="5"
         android:id="@+id/parametres_agence_code_postal" />
 
     <EditText

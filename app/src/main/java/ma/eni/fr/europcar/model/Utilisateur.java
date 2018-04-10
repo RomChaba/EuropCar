@@ -10,19 +10,20 @@ public class Utilisateur
     private String email;
     private String motDePasse;
     private Agence agence;
+    private String token;
 
     public Utilisateur()
     {
 
     }
 
-    public Utilisateur(String email, String motDePasse)
+    public Utilisateur(String email, String motDePasse, String token)
     {
         this.email = email;
         this.motDePasse = motDePasse;
     }
 
-    public Utilisateur(int id, String email, String motDePasse)
+    public Utilisateur(int id, String email, String motDePasse, String token)
     {
         this.id = id;
         this.email = email;
@@ -67,5 +68,15 @@ public class Utilisateur
     public void setAgence(Agence agence)
     {
         this.agence = agence;
+    }
+
+    public String getToken()
+    {
+        return token;
+    }
+
+    public void setToken(String token)
+    {
+        this.token = token;
     }
 }

@@ -17,6 +17,41 @@
     <string name="plein_fait">Le plein est fait</string>
     <string name="kms">Nombre de kilomètres</string>
     <string name="rendre">Rendre</string>
+    <string name="ajouter_photo">Ajouter une photo</string>
+    <string name="token">Token</string>
+
+    <!-- VALIDATION -->
+    <string name="EMAIL_NON_RENSEIGNE">Veuillez renseigner votre adresse email</string>
+    <string name="MOT_DE_PASSE_NON_RENSEIGNE">Veuillez renseigner votre mot de passe</string>
+    <string name="MOT_DE_PASSE_CONFIRMATION_NON_RENSEIGNE">Veuillez confirmer votre mot de passe</string>
+    <string name="MOT_DE_PASSE_CONFIRMATION_ERREUR">La confirmation du mot de passe n\'est pas correcte</string>
+    <string name="TOKEN_NON_RENSEIGNE">Veuillez renseigner le token</string>
+    <string name="EST_ENDOMMAGEE_NON_RENSEIGNE">Veuillez renseigner si la voiture a été endommagée ou non</string>
+    <string name="PLEIN_FAIT_NON_RENSEIGNE">Veuillez renseigner si le plein a été fait ou non</string>
+    <string name="KMS_NON_RENSEIGNE">Veuillez renseigner le kilométrage</string>
+    <string name="KMS_ERREUR">Le nombre de kms doit être composé de chiffres</string>
+    <string name="RAISON_SOCIALE_NON_RENSEIGNE">Veuillez renseigner une raison sociale</string>
+    <string name="SIRET_NON_RENSEIGNE">Veuillez renseigner un numéro de SIRET</string>
+    <string name="SIRET_ERREUR">Le numéro de SIRET doit être composé de 14 chiffres</string>
+    <string name="VOIE_NON_RENSEIGNE">Veuillez renseigner un numéro de voie</string>
+    <string name="CODE_POSTAL_NON_RESEIGNE">Veuillez renseigner un code postal</string>
+    <string name="CODE_POSTAL_ERREUR">Le code postal doit être composé de 5 chiffres</string>
+    <string name="VILLE_NON_RENSEIGNE">Veuillez renseigner un nom de ville</string>
+
+    <!-- OK -->
+    <string name="CONNEXION">Connexion...</string>
+    <string name="PARAMETRES_AGENCE">Informations enregistrées</string>
+    <string name="LOCATION_RENDUE">Location rendue</string>
+
+    <!-- Erreurs -->
+    <string name="EMAIL_EXISTE_DEJA">Cette adresse email est déjà utilisée par un autre utilisateur</string>
+    <string name="EMAIL_EXISTE_PAS">Cette adresse email n\'existe pas</string>
+    <string name="MOT_DE_PASSE_INCORRECT">Le mot de passe est incorrect.</string>
+    <string name="SIRET_EXISTE_DEJA">Ce numéro de SIRET est déjà enregistré.</string>
+    <string name="LOCATION_DEJA_RENDU">La location a déjà été rendue.</string>
+
+    <!-- Retour de location -->
+    <string name="EST_ENDOMMAGEE">Veuillez renseigner si la voiture a été endommagée ou non</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -12,11 +12,18 @@
         android:id="@+id/fragment_location">
     </fragment>
 
-    <fragment
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="ma.eni.fr.europcar.fragment.RendreLocationFragment"
-        android:id="@+id/fragment_rendre_location">
-    </fragment>
+        android:gravity="bottom">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="ma.eni.fr.europcar.fragment.RetourFragment"
+            android:id="@+id/fragment_retour">
+        </fragment>
+
+    </LinearLayout>
 
 </LinearLayout>

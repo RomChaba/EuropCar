@@ -12,21 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".activity.ConnexionActivity"></activity>
-        <activity android:name=".activity.InscriptionActivity" />
-        <activity android:name=".activity.ParametresAgenceActivity" />
-        <activity android:name=".activity.ListeVehiculeActivity" >
+        <activity android:name=".activity.ConnexionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LocationActivity" />
-        <activity android:name=".activity.RendreLocationActivity">
-
+        <activity android:name=".activity.InscriptionActivity" />
+        <activity android:name=".activity.ParametresAgenceActivity" />
+        <activity android:name=".activity.ListeVehiculeActivity"></activity>
+        <activity android:name=".activity.LocationActivity">
         </activity>
-        <activity android:name=".activity.ReservationActivity"></activity>
+        <activity android:name=".activity.RetourActivity">
+        </activity>
     </application>
 
 </manifest>
