@@ -39,7 +39,7 @@ public class UtilisateurService
     public TypeErreur connexion(Utilisateur utilisateur)
     {
         Utilisateur utilisateur2 = UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail());
-        if(utilisateur != null)
+        if(utilisateur2 != null)
         {
             if(!utilisateur.getMotDePasse().equals(utilisateur2.getMotDePasse()))
             {

@@ -34,7 +34,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     {
         super.onResume();
 
-        this.utilisateurService = new UtilisateurService();
+        this.utilisateurService = new UtilisateurService(this);
         this.connexionFragment = ((ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion));
         this.connexionFragment.setTypeAffichage(TypeAffichage.CONNEXION);
     }
@@ -72,7 +72,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         @Override
         protected Void doInBackground(Utilisateur... utilisateurs)
         {
-            this.resultat = utilisateurService.getInstance().connexion(utilisateurs[0]);
+            this.resultat = utilisateurService.connexion(utilisateurs[0]);
 
             return null;
         }

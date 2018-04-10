@@ -27,6 +27,7 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
     private LocationFragment locationFragment;
     private RetourFragment retourFragment;
     private Location location;
+    private LocationService locationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,11 +41,11 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
     {
         super.onResume();
 
+        this.locationService = new LocationService();
         this.locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
         this.retourFragment = (RetourFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_retour);
         int idLocation = getIntent().getIntExtra("idLocation", - 1);
 
-        LocationService locationService = new LocationService();
         this.location = locationService.getLocationAvecId(idLocation);
 
         if(location != null)
@@ -92,7 +93,7 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
             if(TypeErreur.OK.equals(resultat))
             {
                 location.setEnCours(false);
-                LocationService.getInstance().updateLocation(location);
+                locationService.updateLocation(location);
             }
 
             return null;

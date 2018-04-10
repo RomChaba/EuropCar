@@ -11,16 +11,22 @@ import ma.eni.fr.europcar.model.Utilisateur;
 
 public class UtilisateurBouchon implements IUtilisateurDAO
 {
-    private static final UtilisateurBouchon instance = new UtilisateurBouchon();
+    private static UtilisateurBouchon instance;
     List<Utilisateur> utilisateurs;
 
     public UtilisateurBouchon()
     {
         this.utilisateurs = new ArrayList<Utilisateur>();
+        genererDonnees();
     }
 
     public static UtilisateurBouchon getInstance()
     {
+        if(instance == null)
+        {
+            instance = new UtilisateurBouchon();
+        }
+
         return instance;
     }
 

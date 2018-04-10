@@ -32,4 +32,6 @@ public interface ILocationDAO
 
     boolean reservation(Location location);
 
+    void updateLocation(Location location);
+
 }

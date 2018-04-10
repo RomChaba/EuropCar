@@ -19,6 +19,11 @@ public class LocationHTTP implements ILocationDAO
     }
 
     @Override
+    public void updateLocation(Location location) {
+
+    }
+
+    @Override
     public boolean rendre(Retour rendu)
     {
         return false;
@@ -36,6 +41,11 @@ public class LocationHTTP implements ILocationDAO
 
     @Override
     public List<Location> getListLocation() {
+        return null;
+    }
+
+    @Override
+    public List<Location> getListLocationEnCours() {
         return null;
     }
 

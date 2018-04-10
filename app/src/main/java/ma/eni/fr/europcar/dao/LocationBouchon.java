@@ -109,4 +109,17 @@ public class LocationBouchon implements ILocationDAO
 
         return null;
     }
+
+    @Override
+    public void updateLocation(Location location)
+    {
+        for (int i = 0; i < locationList.size(); i++)
+        {
+            if(locationList.get(i).getId() == location.getId())
+            {
+                locationList.set(i, location);
+                break;
+            }
+        }
+    }
 }

@@ -36,6 +36,11 @@ public class LocationService {
         return LocationBouchon.getInstance().getListLocationEnCours();
     }
 
+    public void updateLocation(Location location)
+    {
+        LocationBouchon.getInstance().updateLocation(location);
+    }
+
     public void reservation(Vehicule vehicule, Date date_debut, Date date_fin, String tarif_journalier) {
 
         LocationBouchon.getInstance().reservation(new Location(locationList.size(), date_debut, date_fin, Float.valueOf(tarif_journalier), vehicule, true));

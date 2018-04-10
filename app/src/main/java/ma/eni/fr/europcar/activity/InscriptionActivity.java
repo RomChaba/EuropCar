@@ -33,7 +33,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
     {
         super.onResume();
 
-        this.utilisateurService = new UtilisateurService();
+        this.utilisateurService = new UtilisateurService(this);
         fragment = (ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion);
         fragment.setTypeAffichage(TypeAffichage.INSCRIPTION);
     }
@@ -70,7 +70,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
         @Override
         protected Void doInBackground(Utilisateur... utilisateurs)
         {
-            this.resultat = utilisateurService.getInstance().inscription(utilisateurs[0]);
+            this.resultat = utilisateurService.inscription(utilisateurs[0]);
 
             return null;
         }
