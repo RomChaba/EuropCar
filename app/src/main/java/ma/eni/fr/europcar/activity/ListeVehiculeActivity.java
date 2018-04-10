@@ -8,7 +8,9 @@ import java.net.Inet4Address;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.VehiculeFragment;
+import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.model.Vehicule;
+import ma.eni.fr.europcar.service.LocationService;
 import ma.eni.fr.europcar.service.VehiculeService;
 
 public class ListeVehiculeActivity extends AppCompatActivity implements VehiculeFragment.OnFragmentInteractionListener {
@@ -22,9 +24,9 @@ public class ListeVehiculeActivity extends AppCompatActivity implements Vehicule
 
         vehiculeFragment = (VehiculeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_liste_vehicule);
 
+        VehiculeService vehiculeService = new VehiculeService();
 
-
-        vehiculeFragment.refreshList(VehiculeService.getInstance().getListeDesVehiculesDisponibles());
+        vehiculeFragment.refreshList(vehiculeService.getListeDesVehiculesDisponibles());
 
     }
 
