@@ -50,7 +50,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
     @Override
     public void inscriptionValider(Utilisateur utilisateur)
     {
-        TypeErreur resultat = this.utilisateurService.inscription(utilisateur);
+        TypeErreur resultat = this.utilisateurService.getInstance().inscription(utilisateur);
 
         if(!TypeErreur.OK.equals(resultat))
         {

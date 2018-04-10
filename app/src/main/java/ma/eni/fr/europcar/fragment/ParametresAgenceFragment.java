@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.utils.OF;
 
@@ -51,7 +52,7 @@ public class ParametresAgenceFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_parametres_agence, container, false);
+        final View view = inflater.inflate(R.layout.fragment_parametres_agence, container, false);
 
         this.raisonSociale = view.findViewById(R.id.parametres_agence_raison_sociale);
         this.siret = view.findViewById(R.id.parametres_agence_siret);
@@ -69,12 +70,12 @@ public class ParametresAgenceFragment extends Fragment
 
                 if(OF.isEditTextEmpty(raisonSociale))
                 {
-                    raisonSociale.setError("Veuillez renseigner une raison sociale");
+                    raisonSociale.setError(OF.getStringByName(view, Message.RAISON_SOCIALE_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(OF.isEditTextEmpty(siret))
                 {
-                    siret.setError("Veuillez renseigner un numéro de SIRET");
+                    siret.setError(OF.getStringByName(view, Message.SIRET_NON_RENSEIGNE));
                     erreur = true;
                 }
                 else
@@ -82,7 +83,7 @@ public class ParametresAgenceFragment extends Fragment
                     String siretActuel = OF.getTextFromEditText(siret);
                     if(siretActuel.length() != 14)
                     {
-                        siret.setError("Le numéro de SIRET doit être composé de 14 chiffres");
+                        siret.setError(OF.getStringByName(view, Message.SIRET_ERREUR));
                         erreur = true;
                     }
                     else
@@ -93,19 +94,19 @@ public class ParametresAgenceFragment extends Fragment
                         }
                         catch (ArithmeticException e)
                         {
-                            siret.setError("Le numéro de SIRET doit être composé de 14 chiffres");
+                            siret.setError(OF.getStringByName(view, Message.SIRET_ERREUR));
                             erreur = true;
                         }
                     }
                 }
                 if(OF.isEditTextEmpty(voie))
                 {
-                    voie.setError("Veuillez renseigner un numéro de voie");
+                    voie.setError(OF.getStringByName(view, Message.VOIE_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(OF.isEditTextEmpty(codePostal))
                 {
-                    codePostal.setError("Veuillez renseigner un code postal");
+                    codePostal.setError(OF.getStringByName(view, Message.CODE_POSTAL_NON_RESEIGNE));
                     erreur = true;
                 }
                 else
@@ -113,7 +114,7 @@ public class ParametresAgenceFragment extends Fragment
                     String codePostalActuel = OF.getTextFromEditText(codePostal);
                     if(codePostalActuel.length() != 5)
                     {
-                        codePostal.setError("Le code postal doit être composé de 5 chiffres");
+                        codePostal.setError(OF.getStringByName(view, Message.CODE_POSTAL_ERREUR));
                         erreur = true;
                     }
                     else
@@ -124,14 +125,14 @@ public class ParametresAgenceFragment extends Fragment
                         }
                         catch (ArithmeticException e)
                         {
-                            siret.setError("Le code postal doit être composé de 5 chiffres");
+                            siret.setError(OF.getStringByName(view, Message.CODE_POSTAL_ERREUR));
                             erreur = true;
                         }
                     }
                 }
                 if(OF.isEditTextEmpty(ville))
                 {
-                    ville.setError("Veuillez renseigner un nom de ville");
+                    ville.setError(OF.getStringByName(view, Message.VILLE_NON_RENSEIGNE));
                     erreur = true;
                 }
 

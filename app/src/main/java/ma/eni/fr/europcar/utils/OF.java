@@ -1,6 +1,7 @@
 package ma.eni.fr.europcar.utils;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.EditText;
 
 import ma.eni.fr.europcar.enums.Message;
@@ -35,5 +36,10 @@ public class OF
     public static int getStringByName(Context context, Message name)
     {
         return getStringByName(context, name.name());
+    }
+
+    public static String getStringByName(View view, Message name)
+    {
+        return (String) view.getContext().getText(getStringByName(view.getContext(), name.name()));
     }
 }

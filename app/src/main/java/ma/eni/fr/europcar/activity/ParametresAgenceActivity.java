@@ -40,7 +40,7 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
     @Override
     public void parametresAgenceValide(Agence agence)
     {
-        TypeErreur resultat = this.agenceService.ajouter(agence);
+        TypeErreur resultat = this.agenceService.getInstance().ajouter(agence);
 
         if(!TypeErreur.OK.equals(resultat))
         {

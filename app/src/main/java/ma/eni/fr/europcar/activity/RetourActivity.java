@@ -14,6 +14,7 @@ import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.RetourFragment;
 import ma.eni.fr.europcar.fragment.LocationFragment;
 import ma.eni.fr.europcar.model.Location;
+import ma.eni.fr.europcar.model.Retour;
 import ma.eni.fr.europcar.service.LocationService;
 import ma.eni.fr.europcar.service.RetourService;
 import ma.eni.fr.europcar.utils.OF;
@@ -63,9 +64,10 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
     }
 
     @Override
-    public void rendreLocation(boolean estEndommagee, boolean pleinFait, String kms, String photo)
+    public void rendreLocation(Retour retour)
     {
-        TypeErreur resultat = this.retourService.rendre(this.location, estEndommagee, pleinFait, kms, photo);
+        retour.setLocation(this.location);
+        TypeErreur resultat = this.retourService.getInstance().rendre(retour);
 
         if(!TypeErreur.OK.equals(resultat))
         {

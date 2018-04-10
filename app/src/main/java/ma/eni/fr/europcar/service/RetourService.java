@@ -31,14 +31,14 @@ public class RetourService
         return this.instance;
     }
 
-    public TypeErreur rendre(Location location, boolean estEndommagee, boolean pleinFait, String kms, String photo)
+    public TypeErreur rendre(Retour retour)
     {
-        if(isLocationDejaRendu(location))
+        if(isLocationDejaRendu(retour.getLocation()))
         {
             return TypeErreur.LOCATION_DEJA_RENDU;
         }
 
-        this.retours.add(new Retour(location, estEndommagee, pleinFait, Integer.parseInt(kms), photo));
+        this.retours.add(retour);
 
         return TypeErreur.OK;
     }

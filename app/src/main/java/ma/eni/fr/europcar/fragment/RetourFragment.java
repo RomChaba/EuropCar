@@ -11,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.enums.Message;
+import ma.eni.fr.europcar.model.Retour;
 import ma.eni.fr.europcar.utils.OF;
 
 public class RetourFragment extends Fragment
@@ -49,7 +51,7 @@ public class RetourFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_retour, container, false);
+        final View view = inflater.inflate(R.layout.fragment_retour, container, false);
 
         this.estEndommagee = view.findViewById(R.id.rendre_location_est_endommagee);
         this.pleinFait = view.findViewById(R.id.rendre_location_plein_fait);
@@ -66,17 +68,17 @@ public class RetourFragment extends Fragment
 
                 if(estEndommagee == null)
                 {
-                    estEndommagee.setError("Veuillez renseigner si la voiture a été endommagée ou non");
+                    estEndommagee.setError(OF.getStringByName(view, Message.EST_ENDOMMAGEE_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(pleinFait == null)
                 {
-                    pleinFait.setError("Veuillez renseigner si le plein a été fait ou non");
+                    pleinFait.setError(OF.getStringByName(view, Message.PLEIN_FAIT_NON_RENSEIGNE));
                     erreur = true;
                 }
                 if(OF.isEditTextEmpty(kms))
                 {
-                    kms.setError("Veuillez renseigner le kilométrage");
+                    kms.setError(OF.getStringByName(view, Message.KMS_NON_RENSEIGNE));
                     erreur = true;
                 }
                 else
@@ -87,7 +89,7 @@ public class RetourFragment extends Fragment
                     }
                     catch (Exception e)
                     {
-                        kms.setError("Le nombre de kms doit être composé de chiffres");
+                        kms.setError(OF.getStringByName(view, Message.KMS_ERREUR));
                         erreur = true;
                     }
                 }
@@ -96,7 +98,11 @@ public class RetourFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        mListener.rendreLocation(estEndommagee.isChecked(), pleinFait.isChecked(), OF.getTextFromEditText(kms), "");
+                        Retour retour = new Retour();
+                        retour.setEndommage(estEndommagee.isChecked());
+                        retour.setPleinEffectue(pleinFait.isChecked());
+                        retour.setNbKmsEffectues(Integer.parseInt(OF.getTextFromEditText(kms)));
+                        mListener.rendreLocation(retour);
                     }
                 }
             }
@@ -130,6 +136,6 @@ public class RetourFragment extends Fragment
 
     public interface RendreLocationListener
     {
-        void rendreLocation(boolean estEndommagee, boolean pleinFait, String kms, String photo);
+        void rendreLocation(Retour retour);
     }
 }
