@@ -52,4 +52,14 @@
 
     <!-- Retour de location -->
     <string name="EST_ENDOMMAGEE">Veuillez renseigner si la voiture a été endommagée ou non</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date_de_d_but">Date de début (30/12/2018)</string>
+    <string name="reserver">Réserver</string>
+    <string name="tarif_journalier">Tarif journalier</string>
+    <string name="date_de_fin">Date de fin (30/12/2018)</string>
+
+    <!--Gestion des erreurs-->
+    <string name="erreur_champs_vide">Veuillez remplir le champ</string>
 </resources>

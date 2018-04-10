@@ -13,4 +13,8 @@
     <string name="code_postal">Code postal</string>
     <string name="ville">Ville</string>
     <string name="modifier">Modifier</string>
+    <string name="date_de_d_but">Date de Début</string>
+    <string name="reserver">Réserver</string>
+    <string name="tarif_journalier">Tarif journalier</string>
+    <string name="date_de_fin">Date de fin</string>
 </resources>
