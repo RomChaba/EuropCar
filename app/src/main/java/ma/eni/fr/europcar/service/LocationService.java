@@ -1,5 +1,8 @@
 package ma.eni.fr.europcar.service;
 
+import android.content.Loader;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +47,14 @@ public class LocationService
 
     public void louer(Vehicule vehicule, Agence agence)
     {
+    }
+
+    public void reservation(Vehicule vehicule, Date date_debut, Date date_fin, String tarif_journalier){
+
+
+
+        // public Location(int id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule)
+      locationList.add(new Location(locationList.size(),date_debut,date_fin,Float.valueOf(tarif_journalier),vehicule));
     }
 
     private void genererBidon(){

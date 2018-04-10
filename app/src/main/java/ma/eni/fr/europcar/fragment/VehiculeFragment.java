@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -69,6 +70,17 @@ public class VehiculeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_vehicule, container, false);
+        this.listeVehicule = v.findViewById(R.id.liste_reservation);
+
+        listeVehicule.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                mListener.onVehiculeClick((Vehicule) listeVehicule.getItemAtPosition(position));
+            }
+        });
+
+
         return v;
     }
 
@@ -101,7 +113,7 @@ public class VehiculeFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-
+        void onVehiculeClick(Vehicule vehicule);
     }
 
     public void refreshList(List<Vehicule> vehiculeList){
