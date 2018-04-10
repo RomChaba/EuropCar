@@ -1,8 +1,11 @@
 package ma.eni.fr.europcar.service;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import ma.eni.fr.europcar.dao.UtilisateurBouchon;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.model.Utilisateur;
 
@@ -12,34 +15,22 @@ import ma.eni.fr.europcar.model.Utilisateur;
 
 public class UtilisateurService
 {
-    private static UtilisateurService instance;
-    private List<Utilisateur> utilisateurs;
+    private Context context;
 
-    public UtilisateurService()
+    public UtilisateurService(Context context)
     {
-        this.utilisateurs = new ArrayList<Utilisateur>();
-        genererDonnees();
-    }
 
-    public UtilisateurService getInstance()
-    {
-        if(this.instance == null)
-        {
-            this.instance = new UtilisateurService();
-        }
-
-        return this.instance;
     }
 
     public TypeErreur inscription(Utilisateur utilisateur)
     {
-        if(getUtilisateurAvecEmail(utilisateur.getEmail()) != null)
+        if(UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()) != null)
         {
             return TypeErreur.EMAIL_EXISTE_DEJA;
         }
         else
         {
-            this.utilisateurs.add(utilisateur);
+            UtilisateurBouchon.getInstance().ajouterUtilisateur(utilisateur);
         }
 
         return TypeErreur.OK;
@@ -47,7 +38,7 @@ public class UtilisateurService
 
     public TypeErreur connexion(Utilisateur utilisateur)
     {
-        Utilisateur utilisateur2 = getUtilisateurAvecEmail(utilisateur.getEmail());
+        Utilisateur utilisateur2 = UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail());
         if(utilisateur != null)
         {
             if(!utilisateur.getMotDePasse().equals(utilisateur2.getMotDePasse()))
@@ -61,24 +52,5 @@ public class UtilisateurService
         }
 
         return TypeErreur.OK;
-    }
-
-    private Utilisateur getUtilisateurAvecEmail(String email)
-    {
-        for (Utilisateur utilisateur : this.utilisateurs)
-        {
-            if(utilisateur.getEmail().equals(email))
-            {
-                return utilisateur;
-            }
-        }
-
-        return null;
-    }
-
-    private void genererDonnees()
-    {
-        Utilisateur utilisateur = new Utilisateur("test@gmail.com", "test", "aaa");
-        this.utilisateurs.add(utilisateur);
     }
 }

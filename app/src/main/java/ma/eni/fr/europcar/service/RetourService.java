@@ -21,14 +21,14 @@ public class RetourService
         this.retours = new ArrayList<Retour>();
     }
 
-    public RetourService getInstance()
+    public static RetourService getInstance()
     {
-        if(this.instance == null)
+        if(instance == null)
         {
-            this.instance = new RetourService();
+            instance = new RetourService();
         }
 
-        return this.instance;
+        return instance;
     }
 
     public TypeErreur rendre(Retour retour)

@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".activity.RetourActivity">
         </activity>
+        <activity android:name=".activity.ReservationActivity">
+        </activity>
     </application>
 
 </manifest>
