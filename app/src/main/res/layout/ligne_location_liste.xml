@@ -8,6 +8,7 @@
         android:id="@+id/ligne_id_vehicule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:text="VéhiculeID"
         />
     <LinearLayout
@@ -27,7 +28,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=" - "
+            android:text=" au "
             />
         <TextView
             android:id="@+id/ligne_date_fin"
@@ -43,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tarif Journalier"
+        android:textAlignment="center"
         />
 
 </LinearLayout>

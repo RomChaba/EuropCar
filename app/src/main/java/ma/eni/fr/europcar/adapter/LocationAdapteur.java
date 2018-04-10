@@ -3,18 +3,18 @@ package ma.eni.fr.europcar.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.model.Location;
-import ma.eni.fr.europcar.model.Vehicule;
 
 /**
  * Created by Romain on 09/04/2018.
@@ -56,10 +56,11 @@ public class LocationAdapteur extends ArrayAdapter<Location> {
         this.date_fin           = convertView.findViewById(R.id.ligne_date_fin);
         this.tarif_journalier   = convertView.findViewById(R.id.ligne_tarif_journalier);
 
-        this.idVehicule.setText(String.valueOf(location.getVehicule().getId()));
-        this.date_debut.setText(location.getDate_debut().toString());
-        this.date_fin.setText(location.getDate_fin().toString());
-        this.tarif_journalier.setText(String.valueOf(location.getTarif_journalier()));
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        this.idVehicule.setText("#" + String.valueOf(location.getVehicule().getId()));
+        this.date_debut.setText(format.format(location.getDate_debut()));
+        this.date_fin.setText(format.format(location.getDate_fin()));
+        this.tarif_journalier.setText(String.valueOf(location.getTarif_journalier()) + " €/J");
 
         return convertView;
     }

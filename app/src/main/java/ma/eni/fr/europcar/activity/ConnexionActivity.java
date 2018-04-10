@@ -1,6 +1,8 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -47,23 +49,48 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     @Override
     public void connexionValider(Utilisateur utilisateur)
     {
-        TypeErreur resultat = this.utilisateurService.getInstance().connexion(utilisateur);
-
-        if(!TypeErreur.OK.equals(resultat))
-        {
-            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            Toast.makeText(this, OF.getStringByName(this, Message.CONNEXION), Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(ConnexionActivity.this, LocationActivity.class);
-            startActivity(intent);
-        }
+        ConnexionAsyncTask task = new ConnexionAsyncTask(this);
+        task.execute(utilisateur);
     }
 
     @Override
     public void inscriptionValider(Utilisateur utilisateur)
     {
 
+    }
+
+    private class ConnexionAsyncTask extends AsyncTask<Utilisateur, Void, Void>
+    {
+        private Context context;
+        private TypeErreur resultat;
+
+        public ConnexionAsyncTask(Context context)
+        {
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(Utilisateur... utilisateurs)
+        {
+            this.resultat = utilisateurService.getInstance().connexion(utilisateurs[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            if(!TypeErreur.OK.equals(resultat))
+            {
+                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, LocationActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 }
