@@ -26,6 +26,8 @@ public interface ILocationDAO
     //Gestion des Locations
     List<Location> getListLocation();
 
+    List<Location> getListLocationEnCours();
+
     Location getLocaionById(int id);
 
     boolean reservation(Location location);
