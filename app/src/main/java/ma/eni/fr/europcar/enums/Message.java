@@ -7,7 +7,10 @@ package ma.eni.fr.europcar.enums;
 public enum Message
 {
     PARAMETRES_AGENCE,
+    CONNEXION_REUSSIE,
     CONNEXION,
+    INSCRIPTION_REUSSIE,
+    INSCRIPTION,
     LOCATION_RENDUE,
     EMAIL_NON_RENSEIGNE,
     MOT_DE_PASSE_NON_RENSEIGNE,

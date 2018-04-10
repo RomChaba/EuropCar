@@ -73,7 +73,16 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         protected Void doInBackground(Utilisateur... utilisateurs)
         {
             this.resultat = utilisateurService.getInstance().connexion(utilisateurs[0]);
+
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values)
+        {
+            super.onProgressUpdate(values);
+
+            Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION), Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -87,7 +96,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
             }
             else
             {
-                Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION_REUSSIE), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, LocationActivity.class);
                 startActivity(intent);
             }
