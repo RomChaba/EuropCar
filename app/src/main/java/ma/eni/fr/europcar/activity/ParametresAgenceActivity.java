@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.ConnexionFragment;
 import ma.eni.fr.europcar.fragment.ParametresAgenceFragment;
@@ -43,11 +44,11 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
 
         if(!TypeErreur.OK.equals(resultat))
         {
-            Toast.makeText(this, OF.getStringByName(this, resultat.name()), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_LONG).show();
         }
         else
         {
-            Toast.makeText(this, "Informations enregistrées", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, OF.getStringByName(this, Message.PARAMETRES_AGENCE), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ParametresAgenceActivity.this, LocationActivity.class);
             startActivity(intent);
         }

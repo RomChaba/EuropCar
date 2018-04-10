@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.RetourFragment;
 import ma.eni.fr.europcar.fragment.LocationFragment;
@@ -68,11 +69,11 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
 
         if(!TypeErreur.OK.equals(resultat))
         {
-            Toast.makeText(this, OF.getStringByName(this, resultat.name()), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_LONG).show();
         }
         else
         {
-            Toast.makeText(this, "Location rendue", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, OF.getStringByName(this, Message.LOCATION_RENDUE), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(RetourActivity.this, LocationActivity.class);
             startActivity(intent);
         }

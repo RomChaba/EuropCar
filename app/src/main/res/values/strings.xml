@@ -19,6 +19,11 @@
     <string name="rendre">Rendre</string>
     <string name="ajouter_photo">Ajouter une photo</string>
 
+    <!-- OK -->
+    <string name="CONNEXION">Connexion...</string>
+    <string name="PARAMETRES_AGENCE">Informations enregistrées</string>
+    <string name="LOCATION_RENDUE">Location rendue</string>
+
     <!-- Erreurs -->
     <string name="EMAIL_EXISTE_DEJA">Cette adresse email est déjà utilisée par un autre utilisateur</string>
     <string name="EMAIL_EXISTE_PAS">Cette adresse email n\'existe pas</string>

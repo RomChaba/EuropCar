@@ -78,7 +78,7 @@ public class UtilisateurService
 
     private void genererDonnees()
     {
-        Utilisateur utilisateur = new Utilisateur("test@gmail.com", "test");
+        Utilisateur utilisateur = new Utilisateur("test@gmail.com", "test", "aaa");
         this.utilisateurs.add(utilisateur);
     }
 }

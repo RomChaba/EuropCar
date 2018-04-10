@@ -54,7 +54,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
 
         if(!TypeErreur.OK.equals(resultat))
         {
-            Toast.makeText(this, OF.getStringByName(this, resultat.name()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, OF.getStringByName(this, resultat), Toast.LENGTH_SHORT).show();
         }
         else
         {
