@@ -44,6 +44,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/bouton"
             android:text="@string/modifier"
             android:id="@+id/parametres_agence_modifier" />
 

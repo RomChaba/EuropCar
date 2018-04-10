@@ -35,18 +35,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/se_connecter"
+            style="@style/bouton"
             android:id="@+id/connexion_se_connecter" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inscription"
+            style="@style/bouton"
             android:id="@+id/connexion_inscription" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/s_inscrire"
+            style="@style/bouton"
             android:id="@+id/connexion_s_inscrire" />
 
     </LinearLayout>
