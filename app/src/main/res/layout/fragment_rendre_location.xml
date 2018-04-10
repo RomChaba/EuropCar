@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+    tools:context="ma.eni.fr.europcar.fragment.RendreLocationFragment">
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/est_endommagee"
+        android:id="@+id/rendre_location_est_endommagee"/>
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/plein_fait"
+        android:id="@+id/rendre_location_plein_fait" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/kms"
+        android:id="@+id/rendre_location_kms"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/bouton"
+        android:text="@string/rendre"
+        android:id="@+id/rendre_location_rendre" />
+
+</LinearLayout>

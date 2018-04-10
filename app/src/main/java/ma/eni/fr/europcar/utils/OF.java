@@ -17,4 +17,6 @@ public class OF
     {
         return (editText != null ? editText.getText().toString().trim() : "");
     }
+
+
 }

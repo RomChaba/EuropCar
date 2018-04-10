@@ -157,7 +157,7 @@ public class ParametresAgenceFragment extends Fragment
         }
         else
         {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement LocationListener");
         }
     }
 

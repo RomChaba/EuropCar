@@ -1,12 +1,12 @@
 package ma.eni.fr.europcar.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -15,14 +15,12 @@ import java.util.List;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.adapter.LocationAdapteur;
-import ma.eni.fr.europcar.adapter.VehiculeAdapteur;
 import ma.eni.fr.europcar.model.Location;
-import ma.eni.fr.europcar.model.Vehicule;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LocationFragment.OnFragmentInteractionListener} interface
+ * {@link LocationListener} interface
  * to handle interaction events.
  * Use the {@link LocationFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -36,7 +34,7 @@ public class LocationFragment extends Fragment {
     List<Location> locationList = new ArrayList<>();
     ListView listViewLocation;
 
-    private OnFragmentInteractionListener mListener;
+    private LocationListener mListener;
 
     public LocationFragment() {
         // Required empty public constructor
@@ -76,11 +74,11 @@ public class LocationFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof LocationListener) {
+            mListener = (LocationListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement LocationListener");
         }
     }
 
@@ -100,17 +98,34 @@ public class LocationFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-
+    public interface LocationListener
+    {
+        void afficherDetailLocation(Location location);
     }
 
-    public void refreshList(List<Location> locations){
+    public void refreshList(final List<Location> locations){
         this.locationList = locations;
         ArrayAdapter adapter = new LocationAdapteur((Context) mListener,R.layout.ligne_location_liste,locations);
 
         this.listViewLocation = this.getView().findViewById(R.id.liste_location);
 
         this.listViewLocation.setAdapter(adapter);
+
+        this.listViewLocation.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Location location = locationList.get(position);
+                if(location != null)
+                {
+                    if(mListener != null)
+                    {
+                        mListener.afficherDetailLocation(location);
+                    }
+                }
+            }
+        });
 
     }
 

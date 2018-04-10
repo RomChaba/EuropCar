@@ -13,4 +13,8 @@
     <string name="code_postal">Code postal</string>
     <string name="ville">Ville</string>
     <string name="modifier">Modifier</string>
+    <string name="est_endommagee">Est endommagée</string>
+    <string name="plein_fait">Le plein est fait</string>
+    <string name="kms">Nombre de kilomètres</string>
+    <string name="rendre">Rendre</string>
 </resources>

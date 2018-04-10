@@ -11,19 +11,21 @@ import ma.eni.fr.europcar.fragment.LocationFragment;
 import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.service.LocationService;
 
-public class LocationActivity extends AppCompatActivity implements LocationFragment.OnFragmentInteractionListener {
-
+public class LocationActivity extends AppCompatActivity implements LocationFragment.LocationListener
+{
     private LocationFragment fragment;
     private FloatingActionButton btn_ajout_Location;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
         btn_ajout_Location = findViewById(R.id.btn_nouvelle_location);
@@ -40,5 +42,13 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
         });
 
 
+    }
+
+    @Override
+    public void afficherDetailLocation(Location location)
+    {
+        Intent intent = new Intent(LocationActivity.this, RendreLocationActivity.class);
+        intent.putExtra("idLocation", location.getId());
+        startActivity(intent);
     }
 }
