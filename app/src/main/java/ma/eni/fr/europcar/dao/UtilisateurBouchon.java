@@ -12,7 +12,7 @@ import ma.eni.fr.europcar.model.Utilisateur;
 public class UtilisateurBouchon implements IUtilisateurDAO
 {
     private static UtilisateurBouchon instance;
-    List<Utilisateur> utilisateurs;
+    private List<Utilisateur> utilisateurs;
 
     public UtilisateurBouchon()
     {
@@ -33,7 +33,7 @@ public class UtilisateurBouchon implements IUtilisateurDAO
     @Override
     public void ajouterUtilisateur(Utilisateur utilisateur)
     {
-
+        this.utilisateurs.add(utilisateur);
     }
 
     @Override
@@ -68,6 +68,19 @@ public class UtilisateurBouchon implements IUtilisateurDAO
     public List<Utilisateur> getListeDesUtilisateurs()
     {
         return this.utilisateurs;
+    }
+
+    @Override
+    public void updateUtilisateur(Utilisateur utilisateur)
+    {
+        for (int i = 0; i < utilisateurs.size(); i++)
+        {
+            if(utilisateurs.get(i).getId() == utilisateur.getId())
+            {
+                utilisateurs.set(i, utilisateur);
+                break;
+            }
+        }
     }
 
     private void genererDonnees()
