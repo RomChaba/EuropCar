@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.InscriptionActivity" />
+        <activity android:name=".activity.ReservationActivity" />
         <activity android:name=".activity.ParametresAgenceActivity" />
         <activity android:name=".activity.ListeVehiculeActivity"></activity>
         <activity android:name=".activity.LocationActivity">

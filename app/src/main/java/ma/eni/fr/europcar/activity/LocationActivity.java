@@ -31,7 +31,9 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
         btn_ajout_Location = findViewById(R.id.btn_nouvelle_location);
 
         fragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
-        fragment.refreshList(LocationService.getInstance().getLocationEnCoursList());
+
+        LocationService locationService = new LocationService();
+        fragment.refreshList(locationService.getLocationEnCoursList());
 
         btn_ajout_Location.setOnClickListener(new View.OnClickListener() {
             @Override

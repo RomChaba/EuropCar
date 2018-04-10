@@ -13,6 +13,7 @@ import java.util.List;
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.ReservationFragment;
 import ma.eni.fr.europcar.fragment.VehiculeFragment;
+import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.model.Vehicule;
 import ma.eni.fr.europcar.service.LocationService;
 import ma.eni.fr.europcar.service.VehiculeService;
@@ -36,7 +37,10 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
         super.onResume();
 
         int id = getIntent().getIntExtra("idVehicule",-1);
-        vehicule = VehiculeService.getInstance().getVehiculeById(id);
+
+        VehiculeService vehiculeService = new VehiculeService();
+
+        vehicule = vehiculeService.getVehiculeById(id);
 
         vehiculeList.add(vehicule);
 
@@ -63,9 +67,9 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
             e.printStackTrace();
         }
 
-
+        LocationService locationService = new LocationService();
 //        reservation(Vehicule vehicule,String date_debut,String date_fin,String tarif_journalier)
-        LocationService.getInstance().reservation(vehicule,temp1,temp2,tarif_jouralier);
+        locationService.reservation(vehicule,temp1,temp2,tarif_jouralier);
         Intent intent = new Intent(ReservationActivity.this,LocationActivity.class);
         startActivity(intent);
     }
