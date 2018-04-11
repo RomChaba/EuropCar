@@ -99,6 +99,7 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
 //        reservation(Vehicule vehicule,String date_debut,String date_fin,String tarif_journalier)
             locationService.reservation(locations[0]);
 
+
             return null;
         }
         @Override
