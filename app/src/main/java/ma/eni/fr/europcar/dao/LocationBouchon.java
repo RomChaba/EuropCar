@@ -27,7 +27,7 @@ public class LocationBouchon implements ILocationDAO
     private LocationBouchon() {
 
         generationVehiculeBidon();
-        generationLocationBidon();
+        //generationLocationBidon();
 
     }
 

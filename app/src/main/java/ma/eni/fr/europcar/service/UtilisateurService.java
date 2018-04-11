@@ -53,4 +53,14 @@ public class UtilisateurService
 
         return TypeErreur.OK;
     }
+
+    public void updateUtilisateur(Utilisateur utilisateur)
+    {
+        UtilisateurBouchon.getInstance().updateUtilisateur(utilisateur);
+    }
+
+    public Utilisateur getUtilisateurAvecId(int id)
+    {
+        return UtilisateurBouchon.getInstance().getUtilisateurAvecId(id);
+    }
 }

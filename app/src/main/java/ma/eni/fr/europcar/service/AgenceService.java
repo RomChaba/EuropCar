@@ -1,8 +1,11 @@
 package ma.eni.fr.europcar.service;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import ma.eni.fr.europcar.dao.AgenceBouchon;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Utilisateur;
@@ -13,48 +16,24 @@ import ma.eni.fr.europcar.model.Utilisateur;
 
 public class AgenceService
 {
-    private static AgenceService instance;
-    private List<Agence> agences;
+    private Context context;
 
-    public AgenceService()
+    public AgenceService(Context context)
     {
-        this.agences = new ArrayList<Agence>();
-    }
-
-    public AgenceService getInstance()
-    {
-        if(this.instance == null)
-        {
-            this.instance = new AgenceService();
-        }
-
-        return this.instance;
+        this.context = context;
     }
 
     public TypeErreur ajouter(Agence agence)
     {
-        if(getAgenceAvecSiret(agence.getSiret()) != null)
+        if(AgenceBouchon.getInstance().getAgenceAvecSiret(agence.getSiret()) != null)
         {
             return TypeErreur.SIRET_EXISTE_DEJA;
         }
         else
         {
-            this.agences.add(agence);
+            AgenceBouchon.getInstance().ajouterAgence(agence);
         }
 
         return TypeErreur.OK;
-    }
-
-    private Agence getAgenceAvecSiret(String siret)
-    {
-        for (Agence agence : this.agences)
-        {
-            if(agence.getSiret().equals(siret))
-            {
-                return agence;
-            }
-        }
-
-        return null;
     }
 }

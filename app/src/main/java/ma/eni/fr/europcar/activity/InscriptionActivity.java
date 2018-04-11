@@ -61,6 +61,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
     {
         private Context context;
         private TypeErreur resultat;
+        private Utilisateur utilisateur;
 
         public InscriptionAsyncTask(Context context)
         {
@@ -70,7 +71,8 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
         @Override
         protected Void doInBackground(Utilisateur... utilisateurs)
         {
-            this.resultat = utilisateurService.inscription(utilisateurs[0]);
+            this.utilisateur = utilisateurs[0];
+            this.resultat = utilisateurService.inscription(utilisateur);
 
             return null;
         }
@@ -96,6 +98,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
             {
                 Toast.makeText(context, OF.getStringByName(context, Message.INSCRIPTION_REUSSIE), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, ParametresAgenceActivity.class);
+                intent.putExtra("idUtilisateur", utilisateur.getId());
                 startActivity(intent);
             }
         }

@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import ma.eni.fr.europcar.R;
+import ma.eni.fr.europcar.dao.UtilisateurBouchon;
 import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.ConnexionFragment;
 import ma.eni.fr.europcar.fragment.ParametresAgenceFragment;
 import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
+import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.service.AgenceService;
 import ma.eni.fr.europcar.service.UtilisateurService;
 import ma.eni.fr.europcar.utils.OF;
@@ -22,6 +24,8 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
 {
     ParametresAgenceFragment fragment;
     AgenceService agenceService;
+    UtilisateurService utilisateurService;
+    Utilisateur utilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,7 +39,10 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
     {
         super.onResume();
 
-        this.agenceService = new AgenceService();
+        this.agenceService = new AgenceService(this);
+        this.utilisateurService = new UtilisateurService(this);
+        int idUtilisateur = getIntent().getIntExtra("idUtilisateur", -1);
+        utilisateur = utilisateurService.getUtilisateurAvecId(idUtilisateur);
         fragment = (ParametresAgenceFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_parametres_agence);
     }
 
@@ -59,7 +66,16 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         @Override
         protected Void doInBackground(Agence... agences)
         {
-            this.resultat = agenceService.getInstance().ajouter(agences[0]);
+            this.resultat = agenceService.ajouter(agences[0]);
+
+            if(TypeErreur.OK.equals(resultat))
+            {
+                if(utilisateur != null)
+                {
+                    utilisateur.setAgence(agences[0]);
+                    utilisateurService.updateUtilisateur(utilisateur);
+                }
+            }
 
             return null;
         }
