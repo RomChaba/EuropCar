@@ -1,8 +1,12 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.AsyncQueryHandler;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,9 +71,11 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
             e.printStackTrace();
         }
 
-        LocationService locationService = new LocationService();
-//        reservation(Vehicule vehicule,String date_debut,String date_fin,String tarif_journalier)
-        locationService.reservation(vehicule,temp1,temp2,tarif_jouralier);
+        Location loca = new Location(0,temp1,temp2,Float.valueOf(tarif_jouralier),vehicule,true);
+        ReservationAsync task = new ReservationAsync(ReservationActivity.this);
+        task.execute(loca);
+
+
         Intent intent = new Intent(ReservationActivity.this,LocationActivity.class);
         startActivity(intent);
     }
@@ -77,5 +83,28 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
     @Override
     public void onVehiculeClick(Vehicule vehicule) {
 
+    }
+
+    private class ReservationAsync extends AsyncTask<Location,Void,Void>{
+
+        Context context;
+
+        public ReservationAsync(Context context){
+            this.context = context;
+
+        }
+        @Override
+        protected Void doInBackground(Location... locations) {
+            LocationService locationService = new LocationService();
+//        reservation(Vehicule vehicule,String date_debut,String date_fin,String tarif_journalier)
+            locationService.reservation(locations[0]);
+
+            return null;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(context, getResources().getString(R.string.enristrement_reservation), Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -41,9 +41,9 @@ public class LocationService {
         LocationBouchon.getInstance().updateLocation(location);
     }
 
-    public void reservation(Vehicule vehicule, Date date_debut, Date date_fin, String tarif_journalier) {
+    public void reservation(Location location) {
 
-        LocationBouchon.getInstance().reservation(new Location(locationList.size(), date_debut, date_fin, Float.valueOf(tarif_journalier), vehicule, true));
+        LocationBouchon.getInstance().reservation(location);
 
         //Save dans la base SQLITE
 
