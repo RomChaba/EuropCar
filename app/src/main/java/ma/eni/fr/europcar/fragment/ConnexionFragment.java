@@ -120,6 +120,14 @@ public class ConnexionFragment extends Fragment
                     email.setError(OF.getStringByName(view, Message.EMAIL_NON_RENSEIGNE));
                     erreur = true;
                 }
+                else
+                {
+                    if(!OF.isEmailValide(OF.getTextFromEditText(email)))
+                    {
+                        email.setError(OF.getStringByName(view, Message.EMAIL_ERREUR));
+                        erreur = true;
+                    }
+                }
                 if(OF.isEditTextEmpty(mot_de_passe))
                 {
                     mot_de_passe.setError(OF.getStringByName(view, Message.MOT_DE_PASSE_NON_RENSEIGNE));

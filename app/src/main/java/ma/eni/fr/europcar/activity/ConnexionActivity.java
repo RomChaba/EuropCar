@@ -2,11 +2,13 @@ package ma.eni.fr.europcar.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import ma.eni.fr.europcar.dao.UtilisateurBouchon;
 import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.fragment.ConnexionFragment;
@@ -63,6 +65,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     {
         private Context context;
         private TypeErreur resultat;
+        private Utilisateur utilisateur;
 
         public ConnexionAsyncTask(Context context)
         {
@@ -72,7 +75,8 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         @Override
         protected Void doInBackground(Utilisateur... utilisateurs)
         {
-            this.resultat = utilisateurService.connexion(utilisateurs[0]);
+            this.utilisateur = utilisateurs[0];
+            this.resultat = utilisateurService.connexion(utilisateur);
 
             return null;
         }
@@ -96,6 +100,11 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
             }
             else
             {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("idUtilisateur", UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()).getId());
+                editor.commit();
+
                 Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION_REUSSIE), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, LocationActivity.class);
                 startActivity(intent);

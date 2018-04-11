@@ -80,23 +80,10 @@ public class ParametresAgenceFragment extends Fragment
                 }
                 else
                 {
-                    String siretActuel = OF.getTextFromEditText(siret);
-                    if(siretActuel.length() != 14)
+                    if(!OF.isSiretValide(OF.getTextFromEditText(siret)))
                     {
                         siret.setError(OF.getStringByName(view, Message.SIRET_ERREUR));
                         erreur = true;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            Long.parseLong(siretActuel);
-                        }
-                        catch (ArithmeticException e)
-                        {
-                            siret.setError(OF.getStringByName(view, Message.SIRET_ERREUR));
-                            erreur = true;
-                        }
                     }
                 }
                 if(OF.isEditTextEmpty(voie))

@@ -19,6 +19,7 @@
     <string name="rendre">Rendre</string>
     <string name="ajouter_photo">Ajouter une photo</string>
     <string name="token">Token</string>
+    <string name="aucune_location">Aucune location</string>
 
     <!-- VALIDATION -->
     <string name="EMAIL_NON_RENSEIGNE">Veuillez renseigner votre adresse email</string>
@@ -49,6 +50,7 @@
     <!-- Erreurs -->
     <string name="EMAIL_EXISTE_DEJA">Cette adresse email est déjà utilisée par un autre utilisateur</string>
     <string name="EMAIL_EXISTE_PAS">Cette adresse email n\'existe pas</string>
+    <string name="EMAIL_ERREUR">L\'adresse email n\'est pas valide</string>
     <string name="MOT_DE_PASSE_INCORRECT">Le mot de passe est incorrect.</string>
     <string name="SIRET_EXISTE_DEJA">Ce numéro de SIRET est déjà enregistré.</string>
     <string name="LOCATION_DEJA_RENDU">La location a déjà été rendue.</string>
