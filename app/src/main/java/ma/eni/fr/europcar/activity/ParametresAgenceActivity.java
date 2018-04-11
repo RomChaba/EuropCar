@@ -2,9 +2,11 @@ package ma.eni.fr.europcar.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import ma.eni.fr.europcar.R;
@@ -40,10 +42,13 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         super.onResume();
 
         this.agenceService = new AgenceService(this);
-        this.utilisateurService = new UtilisateurService(this);
-        int idUtilisateur = getIntent().getIntExtra("idUtilisateur", -1);
-        utilisateur = utilisateurService.getUtilisateurAvecId(idUtilisateur);
         fragment = (ParametresAgenceFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_parametres_agence);
+
+        // Récupération de l'utilisateur en cours
+        this.utilisateurService = new UtilisateurService(this);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+        int idUtilisateur = sharedPreferences.getInt("idUtilisateur", -1);
+        this.utilisateur = utilisateurService.getUtilisateurAvecId(idUtilisateur);
     }
 
     @Override
@@ -57,6 +62,7 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
     {
         private Context context;
         private TypeErreur resultat;
+        private Agence agence;
 
         public ParametresAgenceAsyncTask(Context context)
         {
@@ -66,13 +72,14 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         @Override
         protected Void doInBackground(Agence... agences)
         {
-            this.resultat = agenceService.ajouter(agences[0]);
+            this.agence = agences[0];
+            this.resultat = agenceService.ajouter(agence);
 
             if(TypeErreur.OK.equals(resultat))
             {
                 if(utilisateur != null)
                 {
-                    utilisateur.setAgence(agences[0]);
+                    utilisateur.setAgence(agence);
                     utilisateurService.updateUtilisateur(utilisateur);
                 }
             }

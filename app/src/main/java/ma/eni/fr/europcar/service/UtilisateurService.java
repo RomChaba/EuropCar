@@ -54,6 +54,11 @@ public class UtilisateurService
         return TypeErreur.OK;
     }
 
+    public Utilisateur getUtilisateurAvecEmail(String email)
+    {
+        return UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(email);
+    }
+
     public void updateUtilisateur(Utilisateur utilisateur)
     {
         UtilisateurBouchon.getInstance().updateUtilisateur(utilisateur);

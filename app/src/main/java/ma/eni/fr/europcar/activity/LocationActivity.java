@@ -1,15 +1,21 @@
 package ma.eni.fr.europcar.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.LocationFragment;
+import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
+import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.service.LocationService;
+import ma.eni.fr.europcar.service.UtilisateurService;
 
 public class LocationActivity extends AppCompatActivity implements LocationFragment.LocationListener
 {
