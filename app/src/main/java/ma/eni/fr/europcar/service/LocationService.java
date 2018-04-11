@@ -1,16 +1,10 @@
 package ma.eni.fr.europcar.service;
 
-import android.content.Loader;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ma.eni.fr.europcar.dao.LocationBouchon;
-import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
-import ma.eni.fr.europcar.model.Vehicule;
 
 /**
  * Created by Administrateur on 09/04/2018.
@@ -29,7 +23,7 @@ public class LocationService {
     }
 
     public Location getLocationAvecId(int id) {
-        return LocationBouchon.getInstance().getLocaionById(id);
+        return LocationBouchon.getInstance().getLocationById(id);
     }
 
     public List<Location> getLocationListEnCours() {

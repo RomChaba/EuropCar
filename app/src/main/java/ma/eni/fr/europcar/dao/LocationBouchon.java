@@ -100,7 +100,7 @@ public class LocationBouchon implements ILocationDAO
     }
 
     @Override
-    public Location getLocaionById(int id) {
+    public Location getLocationById(int id) {
         for (Location location : this.locationList) {
             if (location.getId() == id) {
                 return location;

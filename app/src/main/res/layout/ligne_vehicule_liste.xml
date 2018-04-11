@@ -14,26 +14,51 @@
         android:id="@+id/ligne_libelle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:text="Libelle"
-        />
-    <TextView
-        android:id="@+id/ligne_nbPlaces"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NbPlaces"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="6dp"
+            android:src="@drawable/ic_person_black_24dp"/>
         <TextView
-            android:id="@+id/ligne_location_min"
+            android:id="@+id/ligne_nbPlaces"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="NbPlaces"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/nombre_minimum_maximum_de_jours_de_location"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="right"
+            android:text="Min : "
+            />
+        <TextView
+            android:id="@+id/ligne_location_min"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="Location min"
             />
+
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -42,14 +67,27 @@
             android:text=" - "
             />
         <TextView
-            android:id="@+id/ligne_location_max"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="right"
+            android:text="Max : "
+            />
+        <TextView
+            android:id="@+id/ligne_location_max"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="Location Max"
             />
+
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/tarif_location"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,8 +97,15 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="right"
             android:text="Tarif min"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="€"
             />
         <TextView
             android:layout_width="0dp"
@@ -74,8 +119,15 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="right"
             android:text="Tarif Max"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="€"
             />
     </LinearLayout>
 

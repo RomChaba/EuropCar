@@ -17,4 +17,5 @@
     <string name="reserver">Réserver</string>
     <string name="tarif_journalier">Tarif journalier</string>
     <string name="date_de_fin">Date de fin</string>
+    <string name="nombre_minimum_maximum_de_jours_de_location">Nombre minimum/maximum de jours de location</string>
 </resources>

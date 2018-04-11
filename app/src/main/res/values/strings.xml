@@ -63,6 +63,8 @@
     <string name="tarif_journalier">Tarif journalier</string>
     <string name="date_de_fin">Date de fin (30/12/2018)</string>
     <string name="enristrement_reservation">Enregistrement de la reservation en cours ...</string>
+    <string name="nombre_minimum_maximum_de_jours_de_location">Jours de location :</string>
+    <string name="tarif_location">Tarif :</string>
 
     <!--Gestion des erreurs-->
     <string name="erreur_champs_vide">Veuillez remplir le champ</string>

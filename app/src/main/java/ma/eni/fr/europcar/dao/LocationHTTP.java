@@ -50,7 +50,7 @@ public class LocationHTTP implements ILocationDAO
     }
 
     @Override
-    public Location getLocaionById(int id) {
+    public Location getLocationById(int id) {
         return null;
     }
 }
