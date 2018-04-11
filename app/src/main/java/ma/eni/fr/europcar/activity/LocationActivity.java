@@ -8,6 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.LocationFragment;
@@ -21,6 +27,7 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
 {
     private LocationFragment fragment;
     private FloatingActionButton btn_ajout_Location;
+    private TextView aucuneLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,11 +42,13 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
         super.onResume();
 
         btn_ajout_Location = findViewById(R.id.btn_nouvelle_location);
+        aucuneLocation = findViewById(R.id.aucune_location);
 
         fragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
 
         LocationService locationService = new LocationService();
-        fragment.refreshList(locationService.getLocationListEnCours());
+        List<Location> locationsEnCours = locationService.getLocationListEnCours();
+        fragment.refreshList(locationsEnCours);
 
         btn_ajout_Location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +58,14 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
             }
         });
 
-
+        if(locationsEnCours != null && locationsEnCours.size() == 0)
+        {
+            aucuneLocation.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            aucuneLocation.setVisibility(View.GONE);
+        }
     }
 
     @Override

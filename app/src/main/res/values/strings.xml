@@ -19,6 +19,7 @@
     <string name="rendre">Rendre</string>
     <string name="ajouter_photo">Ajouter une photo</string>
     <string name="token">Token</string>
+    <string name="aucune_location">Aucune location</string>
 
     <!-- VALIDATION -->
     <string name="EMAIL_NON_RENSEIGNE">Veuillez renseigner votre adresse email</string>
