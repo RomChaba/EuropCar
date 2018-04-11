@@ -42,7 +42,7 @@ public class LocationBouchon implements ILocationDAO
         for (Vehicule test :
                 vehiculeList) {
             //Location(int id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule)
-            locationList.add(new Location(compt, new Date(), new Date(2019, 2, 2), 150f, test, true));
+            locationList.add(new Location(compt, new Date(), new Date(2019, 2, 2), 150f, test, true, null));
             compt++;
         }
     }

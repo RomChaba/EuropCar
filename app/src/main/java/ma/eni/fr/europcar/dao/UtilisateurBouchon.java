@@ -3,6 +3,7 @@ package ma.eni.fr.europcar.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Utilisateur;
 
 /**
@@ -85,7 +86,9 @@ public class UtilisateurBouchon implements IUtilisateurDAO
 
     private void genererDonnees()
     {
-        Utilisateur utilisateur = new Utilisateur("test@gmail.com", "test", "aaa");
+        Agence agence = new Agence("d", "45", "dfh", 49740, "qsf");
+        AgenceBouchon.getInstance().ajouterAgence(agence);
+        Utilisateur utilisateur = new Utilisateur("test@gmail.com", "test", "aaa", agence);
         this.utilisateurs.add(utilisateur);
     }
 }

@@ -17,17 +17,21 @@ public class Utilisateur
 
     }
 
-    public Utilisateur(String email, String motDePasse, String token)
+    public Utilisateur(String email, String motDePasse, String token, Agence agence)
     {
         this.email = email;
         this.motDePasse = motDePasse;
+        this.token = token;
+        this.agence = agence;
     }
 
-    public Utilisateur(int id, String email, String motDePasse, String token)
+    public Utilisateur(int id, String email, String motDePasse, String token, Agence agence)
     {
         this.id = id;
         this.email = email;
         this.motDePasse = motDePasse;
+        this.token = token;
+        this.agence = agence;
     }
 
     public int getId()
