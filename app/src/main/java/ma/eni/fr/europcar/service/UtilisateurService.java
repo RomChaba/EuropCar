@@ -3,9 +3,11 @@ package ma.eni.fr.europcar.service;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.dao.UtilisateurBouchon;
+import ma.eni.fr.europcar.dao.UtilisateurHTTP;
 import ma.eni.fr.europcar.enums.TypeErreur;
 import ma.eni.fr.europcar.model.Utilisateur;
 
@@ -16,10 +18,12 @@ import ma.eni.fr.europcar.model.Utilisateur;
 public class UtilisateurService
 {
     private Context context;
+    private UtilisateurHTTP utilisateurHTTP;
 
     public UtilisateurService(Context context)
     {
-
+        this.context = context;
+        this.utilisateurHTTP = new UtilisateurHTTP(this.context);
     }
 
     public TypeErreur inscription(Utilisateur utilisateur)
@@ -36,22 +40,9 @@ public class UtilisateurService
         return TypeErreur.OK;
     }
 
-    public TypeErreur connexion(Utilisateur utilisateur)
+    public HashMap<String, String> connexion(Utilisateur utilisateur)
     {
-        Utilisateur utilisateur2 = UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail());
-        if(utilisateur2 != null)
-        {
-            if(!utilisateur.getMotDePasse().equals(utilisateur2.getMotDePasse()))
-            {
-                return TypeErreur.MOT_DE_PASSE_INCORRECT;
-            }
-        }
-        else
-        {
-            return TypeErreur.EMAIL_EXISTE_PAS;
-        }
-
-        return TypeErreur.OK;
+        return this.utilisateurHTTP.connexion(utilisateur);
     }
 
     public Utilisateur getUtilisateurAvecEmail(String email)

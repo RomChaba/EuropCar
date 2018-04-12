@@ -4,6 +4,12 @@ import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +58,30 @@ public class OF
     public static String getIp(Context context)
     {
         return (String) context.getText(OF.getStringByName(context, "ipApi"));
+    }
+
+    public static String getApiError(ExecutionException e)
+    {
+        String result = "Erreur";
+
+        if (VolleyError.class.isAssignableFrom(e.getCause().getClass()))
+        {
+            VolleyError ve = (VolleyError) e.getCause();
+            if (ve.networkResponse != null)
+            {
+                try
+                {
+                    JSONObject error = new JSONObject(new String(ve.networkResponse.data));
+                    result = error.getString("error");
+                }
+                catch (JSONException e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        }
+
+        return result;
     }
 
     public static boolean checkRegexValidity(String pattern, String chaine)

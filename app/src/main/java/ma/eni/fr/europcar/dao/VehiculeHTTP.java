@@ -103,7 +103,7 @@ public class VehiculeHTTP implements IVehiculeDAO
         try
         {
             // Tant que la réponse n'est pas celle attendue
-            response = future.get(10, TimeUnit.DAYS);
+            response = future.get(10, TimeUnit.SECONDS);
             try
             {
                 vehicule = getVehiculeAvecJSON((JSONObject) response.get("vehicule"));
