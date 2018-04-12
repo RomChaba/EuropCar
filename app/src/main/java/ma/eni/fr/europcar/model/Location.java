@@ -7,7 +7,7 @@ import java.util.Date;
  */
 
 public class Location {
-    private int id;
+    private String id;
     private Date date_debut;
     private Date date_fin;
     private float tarif_journalier;
@@ -19,7 +19,7 @@ public class Location {
         isEnCours = true;
     }
 
-    public Location(int id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule, boolean isEnCours, Agence agence) {
+    public Location(String id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule, boolean isEnCours, Agence agence) {
         this.id = id;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -37,11 +37,11 @@ public class Location {
         this.vehicule = vehicule;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

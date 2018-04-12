@@ -46,7 +46,7 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
 
         fragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
 
-        LocationService locationService = new LocationService();
+        LocationService locationService = new LocationService(this);
         List<Location> locationsEnCours = locationService.getLocationListEnCours();
         fragment.refreshList(locationsEnCours);
 

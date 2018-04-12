@@ -1,9 +1,12 @@
 package ma.eni.fr.europcar.service;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import ma.eni.fr.europcar.dao.LocationBouchon;
+import ma.eni.fr.europcar.dao.LocationHTTP;
 import ma.eni.fr.europcar.model.Location;
 
 /**
@@ -11,23 +14,32 @@ import ma.eni.fr.europcar.model.Location;
  */
 
 public class LocationService {
-    List<Location> locationList = new ArrayList<>();
-    private static final LocationService ourInstance = new LocationService();
+    Context context;
 
-    public LocationService() {
+
+    public LocationService(Context context) {
+        this.context = context;
     }
 
 
     public List<Location> getLocationList() {
-        return LocationBouchon.getInstance().getListLocation();
+        LocationHTTP locationHTTP = new LocationHTTP(context);
+        return locationHTTP.getListLocation();
+
+//        return LocationBouchon.getInstance().getListLocation();
     }
 
-    public Location getLocationAvecId(int id) {
-        return LocationBouchon.getInstance().getLocationById(id);
+    public Location getLocationAvecId(String id) {
+        LocationHTTP locationHTTP = new LocationHTTP(context);
+        return locationHTTP.getLocationById(id);
+
+//        return LocationBouchon.getInstance().getLocationById(id);
     }
 
     public List<Location> getLocationListEnCours() {
-        return LocationBouchon.getInstance().getListLocationEnCours();
+        LocationHTTP locationHTTP = new LocationHTTP(context);
+        return locationHTTP.getListLocationEnCours();
+//        return LocationBouchon.getInstance().getListLocationEnCours();
     }
 
     public void updateLocation(Location location)
@@ -37,11 +49,13 @@ public class LocationService {
 
     public void reservation(Location location) {
 
-        LocationBouchon.getInstance().reservation(location);
+//        LocationBouchon.getInstance().reservation(location);
 
         //Save dans la base SQLITE
 
         //Appel du server
+        LocationHTTP locationHTTP = new LocationHTTP(context);
+        locationHTTP.reservation(location);
 
 
     }

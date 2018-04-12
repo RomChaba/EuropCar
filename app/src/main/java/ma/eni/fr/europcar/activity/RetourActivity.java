@@ -41,10 +41,10 @@ public class RetourActivity extends AppCompatActivity implements LocationFragmen
     {
         super.onResume();
 
-        this.locationService = new LocationService();
+        this.locationService = new LocationService(this);
         this.locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
         this.retourFragment = (RetourFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_retour);
-        int idLocation = getIntent().getIntExtra("idLocation", - 1);
+        String idLocation = getIntent().getStringExtra("idLocation");
 
         this.location = locationService.getLocationAvecId(idLocation);
 

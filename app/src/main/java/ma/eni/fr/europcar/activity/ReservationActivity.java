@@ -101,7 +101,7 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
             e.printStackTrace();
         }
 
-        Location loca = new Location(0,temp1,temp2,Float.valueOf(tarif_jouralier),vehicule,true, utilisateur.getAgence());
+        Location loca = new Location("",temp1,temp2,Float.valueOf(tarif_jouralier),vehicule,true, utilisateur.getAgence());
         ReservationAsync task = new ReservationAsync(ReservationActivity.this);
         task.execute(loca);
 
@@ -125,7 +125,7 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
         }
         @Override
         protected Void doInBackground(Location... locations) {
-            LocationService locationService = new LocationService();
+            LocationService locationService = new LocationService(context);
 //        reservation(Vehicule vehicule,String date_debut,String date_fin,String tarif_journalier)
             locationService.reservation(locations[0]);
 

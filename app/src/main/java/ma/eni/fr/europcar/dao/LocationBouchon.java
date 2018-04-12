@@ -36,7 +36,7 @@ public class LocationBouchon implements ILocationDAO
         for (Vehicule test :
                 VehiculeBouchon.getInstance().getListVehicule()) {
             //Location(int id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule)
-            locationList.add(new Location(compt, new Date(), new Date(2019, 2, 2), 150f, test, true, null));
+            locationList.add(new Location(compt+"#", new Date(), new Date(2019, 2, 2), 150f, test, true, null));
             compt++;
         }
     }
@@ -77,9 +77,9 @@ public class LocationBouchon implements ILocationDAO
     }
 
     @Override
-    public Location getLocationById(int id) {
+    public Location getLocationById(String id) {
         for (Location location : this.locationList) {
-            if (location.getId() == id) {
+            if (location.getId().equals(id)) {
                 return location;
             }
         }

@@ -22,7 +22,7 @@ public interface ILocationDAO
 
     List<Location> getListLocationEnCours();
 
-    Location getLocationById(int id);
+    Location getLocationById(String id);
 
     boolean reservation(Location location);
 

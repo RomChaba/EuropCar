@@ -40,7 +40,7 @@ public class LocationSQL implements ILocationDAO
     }
 
     @Override
-    public Location getLocationById(int id) {
+    public Location getLocationById(String id) {
         return null;
     }
 }
