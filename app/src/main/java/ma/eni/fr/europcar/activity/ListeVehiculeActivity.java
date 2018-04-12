@@ -5,17 +5,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
-import java.net.Inet4Address;
 import java.util.List;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.VehiculeFragment;
-import ma.eni.fr.europcar.model.Location;
-import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.model.Vehicule;
-import ma.eni.fr.europcar.service.LocationService;
 import ma.eni.fr.europcar.service.VehiculeService;
 
 public class ListeVehiculeActivity extends AppCompatActivity implements VehiculeFragment.OnFragmentInteractionListener
@@ -28,8 +23,16 @@ public class ListeVehiculeActivity extends AppCompatActivity implements Vehicule
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_vehicule);
+
         vehiculeFragment = (VehiculeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_liste_vehicule);
         vehiculeService = new VehiculeService(this);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
         ListeVehiculeAsyncTask task = new ListeVehiculeAsyncTask();
         task.execute();
     }
@@ -38,7 +41,7 @@ public class ListeVehiculeActivity extends AppCompatActivity implements Vehicule
     public void onVehiculeClick(Vehicule vehicule)
     {
         Intent intent = new Intent(ListeVehiculeActivity.this,ReservationActivity.class);
-        intent.putExtra("idVehicule",vehicule.getId());
+        intent.putExtra("idVehicule", vehicule.getId());
         startActivity(intent);
     }
 
