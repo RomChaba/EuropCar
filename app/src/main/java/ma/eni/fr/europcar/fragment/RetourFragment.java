@@ -1,6 +1,7 @@
 package ma.eni.fr.europcar.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -82,7 +83,19 @@ public class RetourFragment extends Fragment
         this.ajouterPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture();
+
+                // Vérifier les permissions
+                if(ContextCompat.checkSelfPermission((Context) mListener, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                {
+                    // La permissions doit être demandée
+                    ActivityCompat.requestPermissions((Activity) mListener, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 42);
+                }
+                else
+                {
+                    // La permission a déjà été donnée, Lancer l'appareil photo
+                    takePicture();
+                }
+
             }
         });
 
@@ -180,7 +193,8 @@ public class RetourFragment extends Fragment
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED
                     && grantResults[2] == PackageManager.PERMISSION_GRANTED
-                    ){
+                    )
+            {takePicture();
             }else{
                 Toast.makeText((Context) mListener, "Merci de nous laisser vous voler vos données personnelles", Toast.LENGTH_SHORT).show();
             }

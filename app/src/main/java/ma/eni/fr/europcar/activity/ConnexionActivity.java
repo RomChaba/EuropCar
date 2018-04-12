@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import ma.eni.fr.europcar.dao.UtilisateurBouchon;
@@ -39,6 +40,8 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         this.utilisateurService = new UtilisateurService(this);
         this.connexionFragment = ((ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion));
         this.connexionFragment.setTypeAffichage(TypeAffichage.CONNEXION);
+
+        Log.i("", OF.getIp(this));
     }
 
     @Override

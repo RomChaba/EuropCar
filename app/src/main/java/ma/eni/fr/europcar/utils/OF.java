@@ -49,6 +49,11 @@ public class OF
         return (String) view.getContext().getText(getStringByName(view.getContext(), name.name()));
     }
 
+    public static String getIp(Context context)
+    {
+        return (String) context.getText(OF.getStringByName(context, "ipApi"));
+    }
+
     public static boolean checkRegexValidity(String pattern, String chaine)
     {
         Pattern p = Pattern.compile(pattern);
