@@ -17,12 +17,6 @@ public interface ILocationDAO
     boolean rendre(Retour rendu);
 
 
-    //Gestion des Vehicules
-    List<Vehicule> getListVehicule();
-
-    Vehicule getVehiculeById(int id);
-
-
     //Gestion des Locations
     List<Location> getListLocation();
 

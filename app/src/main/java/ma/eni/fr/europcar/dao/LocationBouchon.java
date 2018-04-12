@@ -17,7 +17,7 @@ public class LocationBouchon implements ILocationDAO
 {
     private static final LocationBouchon ourInstance = new LocationBouchon();
 
-    private List<Vehicule> vehiculeList = new ArrayList<>();
+
     private List<Location> locationList = new ArrayList<>();
 
     public static LocationBouchon getInstance() {
@@ -26,21 +26,15 @@ public class LocationBouchon implements ILocationDAO
 
     private LocationBouchon() {
 
-        generationVehiculeBidon();
         //generationLocationBidon();
 
     }
 
-    private void generationVehiculeBidon(){
-        //Vehicule(int id, String libelle, int nbPlaces, int locationMin, int locationMax, float tarifMin, float tarifMax)
-        for (int i = 1; i < 16; i++) {
-            this.vehiculeList.add(new Vehicule(i,"Peugeot 30"+i,i,i,i+5,i+0.5f,(10*i)+0.99f));
-        }
-    }
+
     private void generationLocationBidon(){
         int compt = 1;
         for (Vehicule test :
-                vehiculeList) {
+                VehiculeBouchon.getInstance().getListVehicule()) {
             //Location(int id, Date date_debut, Date date_fin, float tarif_journalier, Vehicule vehicule)
             locationList.add(new Location(compt, new Date(), new Date(2019, 2, 2), 150f, test, true, null));
             compt++;
@@ -60,23 +54,6 @@ public class LocationBouchon implements ILocationDAO
     public boolean rendre(Retour rendu)
     {
         return false;
-    }
-
-    @Override
-    public List<Vehicule> getListVehicule() {
-
-        return vehiculeList;
-    }
-
-    @Override
-    public Vehicule getVehiculeById(int id) {
-
-        for (Vehicule veh : vehiculeList) {
-            if (veh.getId() == id) {
-                return veh;
-            }
-        }
-        return null;
     }
 
     @Override

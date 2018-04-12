@@ -40,8 +40,6 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         this.utilisateurService = new UtilisateurService(this);
         this.connexionFragment = ((ConnexionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_connexion));
         this.connexionFragment.setTypeAffichage(TypeAffichage.CONNEXION);
-
-        Log.i("", OF.getIp(this));
     }
 
     @Override

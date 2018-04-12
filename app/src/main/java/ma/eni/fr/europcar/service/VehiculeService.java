@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.eni.fr.europcar.dao.LocationBouchon;
+import ma.eni.fr.europcar.dao.VehiculeBouchon;
 import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.model.Vehicule;
 
@@ -25,12 +26,12 @@ public class VehiculeService
 
     public List<Vehicule> getListeDesVehiculesDisponibles()
     {
-        return LocationBouchon.getInstance().getListVehicule();
+        return VehiculeBouchon.getInstance().getListVehicule();
     }
 
 
     public Vehicule getVehiculeById(int id){
-        return LocationBouchon.getInstance().getVehiculeById(id);
+        return VehiculeBouchon.getInstance().getVehiculeById(id);
     }
 
 }

@@ -30,16 +30,6 @@ public class LocationSQL implements ILocationDAO
     }
 
     @Override
-    public List<Vehicule> getListVehicule() {
-        return null;
-    }
-
-    @Override
-    public Vehicule getVehiculeById(int id) {
-        return null;
-    }
-
-    @Override
     public List<Location> getListLocation() {
         return null;
     }
