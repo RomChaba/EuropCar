@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import ma.eni.fr.europcar.dao.UtilisateurBouchon;
 import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
@@ -65,7 +67,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
     private class ConnexionAsyncTask extends AsyncTask<Utilisateur, Void, Void>
     {
         private Context context;
-        private TypeErreur resultat;
+        private HashMap<String, String> resultat;
         private Utilisateur utilisateur;
 
         public ConnexionAsyncTask(Context context)
@@ -95,15 +97,16 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
         {
             super.onPostExecute(aVoid);
 
-            if(!TypeErreur.OK.equals(resultat))
+            if(this.resultat.containsKey("error"))
             {
-                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, this.resultat.get("error"), Toast.LENGTH_LONG).show();
             }
             else
             {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("idUtilisateur", UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()).getId());
+                editor.putString("idUtilisateur", this.resultat.get("userID"));
+                editor.putString("agenceID", this.resultat.get("userID"));
                 editor.commit();
 
                 Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION_REUSSIE), Toast.LENGTH_LONG).show();

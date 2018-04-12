@@ -6,7 +6,7 @@ package ma.eni.fr.europcar.model;
 
 public class Utilisateur
 {
-    private int id;
+    private String id;
     private String email;
     private String motDePasse;
     private Agence agence;
@@ -25,7 +25,7 @@ public class Utilisateur
         this.agence = agence;
     }
 
-    public Utilisateur(int id, String email, String motDePasse, String token, Agence agence)
+    public Utilisateur(String id, String email, String motDePasse, String token, Agence agence)
     {
         this.id = id;
         this.email = email;
@@ -34,12 +34,12 @@ public class Utilisateur
         this.agence = agence;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

@@ -100,7 +100,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
             {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("idUtilisateur", UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()).getId());
+                editor.putString("idUtilisateur", UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()).getId());
                 editor.commit();
 
                 Toast.makeText(context, OF.getStringByName(context, Message.INSCRIPTION_REUSSIE), Toast.LENGTH_LONG).show();

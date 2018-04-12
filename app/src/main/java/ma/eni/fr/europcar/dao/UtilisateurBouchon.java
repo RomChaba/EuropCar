@@ -1,6 +1,7 @@
 package ma.eni.fr.europcar.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.model.Agence;
@@ -42,7 +43,7 @@ public class UtilisateurBouchon implements IUtilisateurDAO
     {
         for (Utilisateur utilisateur : this.utilisateurs)
         {
-            if(utilisateur.getId() == id)
+            if(utilisateur.getId().equals(id))
             {
                 return utilisateur;
             }
@@ -82,6 +83,12 @@ public class UtilisateurBouchon implements IUtilisateurDAO
                 break;
             }
         }
+    }
+
+    @Override
+    public HashMap<String, String> connexion(Utilisateur utilisateur)
+    {
+        return null;
     }
 
     private void genererDonnees()
