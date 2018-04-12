@@ -33,36 +33,57 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
     Vehicule vehicule;
     UtilisateurService utilisateurService;
     Utilisateur utilisateur;
+    VehiculeService vehiculeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         // Récupération de l'utilisateur en cours
+        this.vehiculeService = new VehiculeService(this);
         this.utilisateurService = new UtilisateurService(this);
         SharedPreferences sharedPreferences = this.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
         int idUtilisateur = sharedPreferences.getInt("idUtilisateur", -1);
         this.utilisateur = utilisateurService.getUtilisateurAvecId(idUtilisateur);
     }
 
+    private class ReservationVehiculeAsync extends AsyncTask<String,Void,Void>{
+
+        Context context;
+
+        public ReservationVehiculeAsync(Context context)
+        {
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings)
+        {
+            vehicule = vehiculeService.getVehiculeById(strings[0]);
+            vehiculeList.add(vehicule);
+            vehiculeFragment = (VehiculeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_liste_vehicule);
+            reservationFragment = (ReservationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_form_reservation);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            vehiculeFragment.refreshList(vehiculeList);
+        }
+    }
+
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
-        int id = getIntent().getIntExtra("idVehicule",-1);
-
-        VehiculeService vehiculeService = new VehiculeService();
-
-        vehicule = vehiculeService.getVehiculeById(id);
-
-        vehiculeList.add(vehicule);
-
-
-        vehiculeFragment = (VehiculeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_liste_vehicule);
-        reservationFragment = (ReservationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_form_reservation);
-
-        vehiculeFragment.refreshList(vehiculeList);
-
+        String id = getIntent().getStringExtra("idVehicule");
+        ReservationVehiculeAsync task = new ReservationVehiculeAsync(this);
+        task.execute(id);
     }
 
     @Override

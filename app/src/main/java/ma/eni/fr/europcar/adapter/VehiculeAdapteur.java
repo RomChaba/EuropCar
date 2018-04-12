@@ -62,7 +62,7 @@ public class VehiculeAdapteur extends ArrayAdapter<Vehicule> {
         this.tarif_min      = convertView.findViewById(R.id.ligne_tarif_min);
         this.tarif_max      = convertView.findViewById(R.id.ligne_tarif_max);
 
-        this.idVehicule.setText(String.valueOf(vehicule.getId()));
+        this.idVehicule.setText(vehicule.getId());
         this.libelle.setText(vehicule.getLibelle());
         this.nb_place.setText(String.valueOf(vehicule.getNbPlaces()));
         this.location_min.setText(String.valueOf(vehicule.getLocationMin()));

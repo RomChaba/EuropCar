@@ -34,11 +34,11 @@ public class VehiculeBouchon implements IVehiculeDAO
     }
 
     @Override
-    public Vehicule getVehiculeById(int id)
+    public Vehicule getVehiculeById(String id)
     {
         for (Vehicule veh : vehiculeList)
         {
-            if (veh.getId() == id)
+            if (veh.getId().equals(id))
             {
                 return veh;
             }
@@ -49,7 +49,7 @@ public class VehiculeBouchon implements IVehiculeDAO
     private void generationVehiculeBidon(){
         //Vehicule(int id, String libelle, int nbPlaces, int locationMin, int locationMax, float tarifMin, float tarifMax)
         for (int i = 1; i < 16; i++) {
-            this.vehiculeList.add(new Vehicule(i,"Peugeot 30"+i,i,i,i+5,i+0.5f,(10*i)+0.99f));
+            this.vehiculeList.add(new Vehicule("fqsd","Peugeot 30"+i,i,i,i+5,i+0.5f,(10*i)+0.99f));
         }
     }
 }

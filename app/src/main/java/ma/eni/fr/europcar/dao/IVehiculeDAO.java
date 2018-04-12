@@ -12,5 +12,5 @@ public interface IVehiculeDAO
 {
     List<Vehicule> getListVehicule();
 
-    Vehicule getVehiculeById(int id);
+    Vehicule getVehiculeById(String id);
 }

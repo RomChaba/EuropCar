@@ -5,18 +5,20 @@ package ma.eni.fr.europcar.model;
  */
 
 public class Vehicule {
-    private int id;
+    private String id;
     private String libelle;
     private int nbPlaces;
     private int locationMin;
     private int locationMax;
     private float tarifMin;
     private float tarifMax;
+    private float tarifMoyen;
+    private boolean isDisponible;
 
     public Vehicule() {
     }
 
-    public Vehicule(int id, String libelle, int nbPlaces, int locationMin, int locationMax, float tarifMin, float tarifMax) {
+    public Vehicule(String id, String libelle, int nbPlaces, int locationMin, int locationMax, float tarifMin, float tarifMax) {
         this.id = id;
         this.libelle = libelle;
         this.nbPlaces = nbPlaces;
@@ -26,11 +28,11 @@ public class Vehicule {
         this.tarifMax = tarifMax;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,5 +82,21 @@ public class Vehicule {
 
     public void setTarifMax(float tarifMax) {
         this.tarifMax = tarifMax;
+    }
+
+    public float getTarifMoyen() {
+        return tarifMoyen;
+    }
+
+    public void setTarifMoyen(float tarifMoyen) {
+        this.tarifMoyen = tarifMoyen;
+    }
+
+    public boolean isDisponible() {
+        return isDisponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        isDisponible = disponible;
     }
 }
