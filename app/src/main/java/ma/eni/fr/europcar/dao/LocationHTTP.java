@@ -18,6 +18,7 @@ import org.json.JSONStringer;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -47,30 +48,26 @@ public class LocationHTTP implements ILocationDAO
 
 
     @Override
-    public boolean reservation(Location location)
+    public HashMap<String, String> reservation(Location location, String idUtilisateur)
     {
+        HashMap<String, String> resultat = new HashMap<String, String>();
 
         // Url de la requête
-        String url = OF.getIp(context) + METHODE;
+        String url = OF.getIp(context) + METHODE + "/" + idUtilisateur;
 
         //Création des données a envoyer au serveur
 
-        JSONObject value = new JSONObject();
-        try {
-            value.put("vehiculeID",location.getVehicule().getId());
-            value.put("agenceID",location.getAgence().getId());
-            value.put("dateDebut",location.getDate_debut());
-            value.put("dateFin",location.getDate_fin());
-            value.put("tarifJournalier",location.getTarif_journalier());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
+        // Paramètres
+        HashMap<String, String> parametres = new HashMap<String, String>();
+        parametres.put("vehiculeID",location.getVehicule().getId());
+        parametres.put("agenceID",location.getAgence().getId());
+        parametres.put("dateDebut", String.valueOf(location.getDate_debut().getTime()));
+        parametres.put("dateFin", String.valueOf(location.getDate_fin().getTime()));
+        parametres.put("tarifJournalier", String.valueOf(location.getTarif_journalier()));
 
         // Création de la requette
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,value, future, future);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,new JSONObject(parametres), future, future);
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
 
@@ -82,19 +79,22 @@ public class LocationHTTP implements ILocationDAO
             try
             {
                 JSONArray liste = (JSONArray) response.get("locations");
-                return true;
             }
             catch (JSONException e)
             {
                 Log.i(context.getClass().getName(), e.getMessage());
             }
         }
-        catch (InterruptedException|ExecutionException |TimeoutException e)
+        catch (InterruptedException|TimeoutException e)
         {
             Log.i(context.getClass().getName(), e.getMessage());
-            return false;
         }
-        return false;
+        catch (ExecutionException e)
+        {
+            resultat.put("error", OF.getApiError(e));
+        }
+
+        return resultat;
     }
 
     @Override
@@ -110,11 +110,11 @@ public class LocationHTTP implements ILocationDAO
 
 
     @Override
-    public List<Location> getListLocation() {
+    public List<Location> getListLocation(String idAgence) {
         final List<Location> locations = new ArrayList<Location>();
 
         // Url de la requête
-        String url = OF.getIp(context) + METHODE;
+        String url = OF.getIp(context) + METHODE + "/" + idAgence;
 
         // Création de la requette
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
@@ -156,8 +156,8 @@ public class LocationHTTP implements ILocationDAO
     }
 
     @Override
-    public List<Location> getListLocationEnCours() {
-        return getListLocation();
+    public List<Location> getListLocationEnCours(String idAgence) {
+        return getListLocation(idAgence);
     }
 
     @Override
@@ -222,7 +222,7 @@ public class LocationHTTP implements ILocationDAO
                 location.setEnCours(Boolean.valueOf(object.getString("isEnCours")));
                 //TODO REMPLACER PAR L'AGENCE DE LA RQT HTTP
 //                Agence(String raisonSociale, String siret, String voie, int codePostal, String ville)
-                location.setAgence(new Agence("b940daab-4571-4274-91d0-0bfb5238e13d","123456789123","rue de Nantes",44000,"Nantes"));
+                location.setAgence(agenceService.getAgenceAvecId(object.getString("agenceID")));
             }
             catch (JSONException e)
             {

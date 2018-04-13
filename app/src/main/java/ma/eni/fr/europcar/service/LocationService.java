@@ -3,6 +3,7 @@ package ma.eni.fr.europcar.service;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.dao.LocationBouchon;
@@ -15,16 +16,18 @@ import ma.eni.fr.europcar.model.Location;
 
 public class LocationService {
     Context context;
+    LocationHTTP locationHTTP;
 
 
     public LocationService(Context context) {
         this.context = context;
+        this.locationHTTP = new LocationHTTP(context);
     }
 
 
-    public List<Location> getLocationList() {
+    public List<Location> getLocationList(String idAgence) {
         LocationHTTP locationHTTP = new LocationHTTP(context);
-        return locationHTTP.getListLocation();
+        return locationHTTP.getListLocation(idAgence);
 
 //        return LocationBouchon.getInstance().getListLocation();
     }
@@ -36,9 +39,9 @@ public class LocationService {
 //        return LocationBouchon.getInstance().getLocationById(id);
     }
 
-    public List<Location> getLocationListEnCours() {
+    public List<Location> getLocationListEnCours(String idAgence) {
         LocationHTTP locationHTTP = new LocationHTTP(context);
-        return locationHTTP.getListLocationEnCours();
+        return locationHTTP.getListLocationEnCours(idAgence);
 //        return LocationBouchon.getInstance().getListLocationEnCours();
     }
 
@@ -47,17 +50,14 @@ public class LocationService {
         LocationBouchon.getInstance().updateLocation(location);
     }
 
-    public void reservation(Location location) {
+    public HashMap<String, String> reservation(Location location, String idUtilisateur) {
 
 //        LocationBouchon.getInstance().reservation(location);
 
         //Save dans la base SQLITE
 
         //Appel du server
-        LocationHTTP locationHTTP = new LocationHTTP(context);
-        locationHTTP.reservation(location);
-
-
+        return locationHTTP.reservation(location, idUtilisateur);
     }
 
 }

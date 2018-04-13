@@ -1,5 +1,6 @@
 package ma.eni.fr.europcar.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.model.Location;
@@ -18,13 +19,13 @@ public interface ILocationDAO
 
 
     //Gestion des Locations
-    List<Location> getListLocation();
+    List<Location> getListLocation(String idAgence);
 
-    List<Location> getListLocationEnCours();
+    List<Location> getListLocationEnCours(String idAgence);
 
     Location getLocationById(String id);
 
-    boolean reservation(Location location);
+    HashMap<String, String> reservation(Location location, String idUtilisateur);
 
     void updateLocation(Location location);
 

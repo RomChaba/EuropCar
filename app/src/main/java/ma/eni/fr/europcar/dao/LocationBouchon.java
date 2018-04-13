@@ -2,6 +2,7 @@ package ma.eni.fr.europcar.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.model.Location;
@@ -44,10 +45,10 @@ public class LocationBouchon implements ILocationDAO
 
 
     @Override
-    public boolean reservation(Location location)
+    public HashMap<String, String> reservation(Location location, String idUtilisateur)
     {
         locationList.add(location);
-        return true;
+        return null;
     }
 
     @Override
@@ -57,12 +58,12 @@ public class LocationBouchon implements ILocationDAO
     }
 
     @Override
-    public List<Location> getListLocation() {
+    public List<Location> getListLocation(String idAgence) {
         return locationList;
     }
 
     @Override
-    public List<Location> getListLocationEnCours() {
+    public List<Location> getListLocationEnCours(String idAgence) {
 
         List<Location> locations = new ArrayList<Location>();
         for (Location location : locationList)

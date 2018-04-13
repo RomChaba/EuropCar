@@ -13,14 +13,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.fragment.ReservationFragment;
 import ma.eni.fr.europcar.fragment.VehiculeFragment;
+import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.model.Utilisateur;
 import ma.eni.fr.europcar.model.Vehicule;
+import ma.eni.fr.europcar.service.AgenceService;
 import ma.eni.fr.europcar.service.LocationService;
 import ma.eni.fr.europcar.service.UtilisateurService;
 import ma.eni.fr.europcar.service.VehiculeService;
@@ -31,9 +34,10 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
     ReservationFragment reservationFragment;
     List<Vehicule> vehiculeList = new ArrayList<>();
     Vehicule vehicule;
-    UtilisateurService utilisateurService;
-    Utilisateur utilisateur;
     VehiculeService vehiculeService;
+    AgenceService agenceService;
+    LocationService locationService;
+    Agence agence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +45,9 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
         setContentView(R.layout.activity_reservation);
         // Récupération de l'utilisateur en cours
         this.vehiculeService = new VehiculeService(this);
-        this.utilisateurService = new UtilisateurService(this);
-        SharedPreferences sharedPreferences = this.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
-        int idUtilisateur = sharedPreferences.getInt("idUtilisateur", -1);
-        this.utilisateur = utilisateurService.getUtilisateurAvecId(idUtilisateur);
-    }
+        this.agenceService = new AgenceService(this);
+        this.locationService = new LocationService(this);
+        }
 
     private class ReservationVehiculeAsync extends AsyncTask<String,Void,Void>{
 
@@ -84,6 +86,8 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
         String id = getIntent().getStringExtra("idVehicule");
         ReservationVehiculeAsync task = new ReservationVehiculeAsync(this);
         task.execute(id);
+        AgenceAsynkTask task1 = new AgenceAsynkTask(this);
+        task1.execute();
     }
 
     @Override
@@ -101,7 +105,9 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
             e.printStackTrace();
         }
 
-        Location loca = new Location("",temp1,temp2,Float.valueOf(tarif_jouralier),vehicule,true, utilisateur.getAgence());
+
+
+        Location loca = new Location("",temp1,temp2,Float.valueOf(tarif_jouralier),vehicule,true, agence);
         ReservationAsync task = new ReservationAsync(ReservationActivity.this);
         task.execute(loca);
 
@@ -115,27 +121,59 @@ public class ReservationActivity extends AppCompatActivity implements Reservatio
 
     }
 
-    private class ReservationAsync extends AsyncTask<Location,Void,Void>{
+    private class AgenceAsynkTask extends AsyncTask<String, Void, Void>
+    {
+        private Context context;
 
-        Context context;
-
-        public ReservationAsync(Context context){
+        public AgenceAsynkTask(Context context)
+        {
             this.context = context;
-
         }
-        @Override
-        protected Void doInBackground(Location... locations) {
-            LocationService locationService = new LocationService(context);
-//        reservation(Vehicule vehicule,String date_debut,String date_fin,String tarif_journalier)
-            locationService.reservation(locations[0]);
 
+        @Override
+        protected Void doInBackground(String... strings)
+        {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+            String idAgence = sharedPreferences.getString("idAgence", "");
+            agence = agenceService.getAgenceAvecId(idAgence);
+
+            return null;
+        }
+    }
+
+    private class ReservationAsync extends AsyncTask<Location,Void,Void>
+    {
+        Context context;
+        HashMap<String, String> resultat;
+
+        public ReservationAsync(Context context)
+        {
+            this.context = context;
+            resultat = new HashMap<String, String>();
+        }
+
+        @Override
+        protected Void doInBackground(Location... locations)
+        {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+            String idUtilisateur = sharedPreferences.getString("idUtilisateur", "");
+            resultat = locationService.reservation(locations[0], idUtilisateur);
 
             return null;
         }
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
-            Toast.makeText(context, getResources().getString(R.string.enristrement_reservation), Toast.LENGTH_SHORT).show();
+
+            if(this.resultat.containsKey("error"))
+            {
+                Toast.makeText(context, this.resultat.get("error"), Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(context, getResources().getString(R.string.enristrement_reservation), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

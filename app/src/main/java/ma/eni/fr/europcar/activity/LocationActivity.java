@@ -74,7 +74,9 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
         @Override
         protected Void doInBackground(Void... voids)
         {
-            locations = locationService.getLocationListEnCours();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+            String idAgence = sharedPreferences.getString("idAgence", "");
+            locations = locationService.getLocationListEnCours(idAgence);
 
             return null;
         }

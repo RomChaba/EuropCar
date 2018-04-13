@@ -1,5 +1,6 @@
 package ma.eni.fr.europcar.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.model.Location;
@@ -13,9 +14,9 @@ import ma.eni.fr.europcar.model.Vehicule;
 public class LocationSQL implements ILocationDAO
 {
     @Override
-    public boolean reservation(Location location)
+    public HashMap<String, String> reservation(Location location, String idUtilisateur)
     {
-        return false;
+        return null;
     }
 
     @Override
@@ -30,12 +31,12 @@ public class LocationSQL implements ILocationDAO
     }
 
     @Override
-    public List<Location> getListLocation() {
+    public List<Location> getListLocation(String idAgence) {
         return null;
     }
 
     @Override
-    public List<Location> getListLocationEnCours() {
+    public List<Location> getListLocationEnCours(String idAgence) {
         return null;
     }
 
