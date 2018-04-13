@@ -6,11 +6,11 @@ package ma.eni.fr.europcar.model;
 
 public class Agence
 {
-    private int id;
+    private String id;
     private String raisonSociale;
     private String siret;
     private String voie;
-    private int codePostal;
+    private String codePostal;
     private String ville;
 
     public Agence()
@@ -18,7 +18,7 @@ public class Agence
 
     }
 
-    public Agence(String raisonSociale, String siret, String voie, int codePostal, String ville)
+    public Agence(String raisonSociale, String siret, String voie, String codePostal, String ville)
     {
         this.raisonSociale = raisonSociale;
         this.siret = siret;
@@ -27,7 +27,7 @@ public class Agence
         this.ville = ville;
     }
 
-    public Agence(int id, String raisonSociale, String siret, String voie, int codePostal, String ville)
+    public Agence(String id, String raisonSociale, String siret, String voie, String codePostal, String ville)
     {
         this.id = id;
         this.raisonSociale = raisonSociale;
@@ -37,12 +37,12 @@ public class Agence
         this.ville = ville;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }
@@ -77,12 +77,12 @@ public class Agence
         this.voie = voie;
     }
 
-    public int getCodePostal()
+    public String getCodePostal()
     {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal)
+    public void setCodePostal(String codePostal)
     {
         this.codePostal = codePostal;
     }

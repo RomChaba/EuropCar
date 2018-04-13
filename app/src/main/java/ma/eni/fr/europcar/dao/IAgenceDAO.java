@@ -1,5 +1,7 @@
 package ma.eni.fr.europcar.dao;
 
+import java.util.HashMap;
+
 import ma.eni.fr.europcar.model.Agence;
 
 /**
@@ -8,7 +10,7 @@ import ma.eni.fr.europcar.model.Agence;
 
 public interface IAgenceDAO
 {
-    void ajouterAgence(Agence agence);
+    Agence getAgenceAvecId(String id);
 
-    Agence getAgenceAvecSiret(String siret);
+    HashMap<String, String> updateAgence(Agence agence, String idUtilisateur);
 }
