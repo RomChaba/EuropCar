@@ -3,6 +3,7 @@ package ma.eni.fr.europcar.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import ma.eni.fr.europcar.fragment.LocationFragment;
 import ma.eni.fr.europcar.model.Agence;
 import ma.eni.fr.europcar.model.Location;
 import ma.eni.fr.europcar.model.Utilisateur;
+import ma.eni.fr.europcar.model.Vehicule;
 import ma.eni.fr.europcar.service.LocationService;
 import ma.eni.fr.europcar.service.UtilisateurService;
 
@@ -28,12 +30,18 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
     private LocationFragment fragment;
     private FloatingActionButton btn_ajout_Location;
     private TextView aucuneLocation;
+    private LocationService locationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        btn_ajout_Location = findViewById(R.id.btn_nouvelle_location);
+        aucuneLocation = findViewById(R.id.aucune_location);
+        fragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
+        this.locationService = new LocationService(this);
     }
 
     @Override
@@ -41,14 +49,8 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
     {
         super.onResume();
 
-        btn_ajout_Location = findViewById(R.id.btn_nouvelle_location);
-        aucuneLocation = findViewById(R.id.aucune_location);
-
-        fragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_location);
-
-        LocationService locationService = new LocationService(this);
-        List<Location> locationsEnCours = locationService.getLocationListEnCours();
-        fragment.refreshList(locationsEnCours);
+        ListeLocationAsyncTask task = new ListeLocationAsyncTask(this);
+        task.execute();
 
         btn_ajout_Location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,14 +59,40 @@ public class LocationActivity extends AppCompatActivity implements LocationFragm
                 startActivity(intent);
             }
         });
+    }
 
-        if(locationsEnCours != null && locationsEnCours.size() == 0)
+    private class ListeLocationAsyncTask extends AsyncTask<Void, Void, Void>
+    {
+        private Context context;
+        private List<Location> locations;
+
+        public ListeLocationAsyncTask(Context context)
         {
-            aucuneLocation.setVisibility(View.VISIBLE);
+            this.context = context;
         }
-        else
+
+        @Override
+        protected Void doInBackground(Void... voids)
         {
-            aucuneLocation.setVisibility(View.GONE);
+            locations = locationService.getLocationListEnCours();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            fragment.refreshList(locations);
+            if(locations != null && locations.size() == 0)
+            {
+                aucuneLocation.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                aucuneLocation.setVisibility(View.GONE);
+            }
         }
     }
 
