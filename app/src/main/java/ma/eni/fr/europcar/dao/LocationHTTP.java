@@ -1,6 +1,7 @@
 package ma.eni.fr.europcar.dao;
 
 import android.content.Context;
+import android.util.JsonWriter;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -12,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -47,6 +49,51 @@ public class LocationHTTP implements ILocationDAO
     @Override
     public boolean reservation(Location location)
     {
+
+        // Url de la requête
+        String url = OF.getIp(context) + METHODE;
+
+        //Création des données a envoyer au serveur
+
+        JSONObject value = new JSONObject();
+        try {
+            value.put("vehiculeID",location.getVehicule().getId());
+            value.put("agenceID",location.getAgence().getId());
+            value.put("dateDebut",location.getDate_debut());
+            value.put("dateFin",location.getDate_fin());
+            value.put("tarifJournalier",location.getTarif_journalier());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+        // Création de la requette
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,value, future, future);
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+
+        JSONObject response = null;
+        try
+        {
+            // Tant que la réponse n'est pas celle attendue
+            response = future.get(10, TimeUnit.SECONDS);
+            try
+            {
+                JSONArray liste = (JSONArray) response.get("locations");
+                return true;
+            }
+            catch (JSONException e)
+            {
+                Log.i(context.getClass().getName(), e.getMessage());
+            }
+        }
+        catch (InterruptedException|ExecutionException |TimeoutException e)
+        {
+            Log.i(context.getClass().getName(), e.getMessage());
+            return false;
+        }
         return false;
     }
 
@@ -174,7 +221,8 @@ public class LocationHTTP implements ILocationDAO
                 location.setVehicule(vehiculeService.getVehiculeById(object.getString("vehiculeID")));
                 location.setEnCours(Boolean.valueOf(object.getString("isEnCours")));
                 //TODO REMPLACER PAR L'AGENCE DE LA RQT HTTP
-                location.setAgence(new Agence());
+//                Agence(String raisonSociale, String siret, String voie, int codePostal, String ville)
+                location.setAgence(new Agence("b940daab-4571-4274-91d0-0bfb5238e13d","123456789123","rue de Nantes",44000,"Nantes"));
             }
             catch (JSONException e)
             {
