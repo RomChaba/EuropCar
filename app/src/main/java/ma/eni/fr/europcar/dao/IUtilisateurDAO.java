@@ -22,4 +22,6 @@ public interface IUtilisateurDAO
     void updateUtilisateur(Utilisateur utilisateur);
 
     HashMap<String, String> connexion(Utilisateur utilisateur);
+
+    HashMap<String, String> inscription(Utilisateur utilisateur);
 }

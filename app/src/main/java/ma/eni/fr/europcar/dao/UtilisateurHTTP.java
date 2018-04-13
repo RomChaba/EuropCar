@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
@@ -70,21 +69,29 @@ public class UtilisateurHTTP implements IUtilisateurDAO
     @Override
     public HashMap<String, String> connexion(Utilisateur utilisateur)
     {
+        return connexionEtInscription(utilisateur, OF.getIp(context) + CONNEXION);
+    }
+
+    @Override
+    public HashMap<String, String> inscription(Utilisateur utilisateur)
+    {
+        return connexionEtInscription(utilisateur, OF.getIp(context) + INSCRIPTION + "/" + utilisateur.getToken());
+    }
+
+    private HashMap<String, String> connexionEtInscription(Utilisateur utilisateur, String url)
+    {
         HashMap<String, String> resultat = new HashMap<String, String>();
 
-        // Url de la requête
-        String url = OF.getIp(context) + CONNEXION;
-
+        // Paramètres
         HashMap<String, String> parametres = new HashMap<String, String>();
         parametres.put("mail", utilisateur.getEmail());
         parametres.put("password", utilisateur.getMotDePasse());
 
         // Création de la requette
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,new JSONObject(parametres), future, future);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(parametres), future, future);
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
-
         JSONObject response = null;
         try
         {

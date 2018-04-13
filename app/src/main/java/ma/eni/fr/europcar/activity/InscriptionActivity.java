@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import ma.eni.fr.europcar.dao.UtilisateurBouchon;
 import ma.eni.fr.europcar.enums.Message;
 import ma.eni.fr.europcar.enums.TypeErreur;
@@ -62,7 +64,7 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
     private class InscriptionAsyncTask extends AsyncTask<Utilisateur, Void, Void>
     {
         private Context context;
-        private TypeErreur resultat;
+        private HashMap<String, String> resultat;
         private Utilisateur utilisateur;
 
         public InscriptionAsyncTask(Context context)
@@ -92,15 +94,16 @@ public class InscriptionActivity extends AppCompatActivity implements ConnexionF
         {
             super.onPostExecute(aVoid);
 
-            if(!TypeErreur.OK.equals(resultat))
+            if(this.resultat.containsKey("error"))
             {
-                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, this.resultat.get("error"), Toast.LENGTH_LONG).show();
             }
             else
             {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("idUtilisateur", UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()).getId());
+                editor.putString("idUtilisateur", this.resultat.get("userID"));
+                editor.putString("idAgence", this.resultat.get("agenceID"));
                 editor.commit();
 
                 Toast.makeText(context, OF.getStringByName(context, Message.INSCRIPTION_REUSSIE), Toast.LENGTH_LONG).show();

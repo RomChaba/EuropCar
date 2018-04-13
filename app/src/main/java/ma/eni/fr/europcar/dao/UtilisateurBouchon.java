@@ -91,10 +91,15 @@ public class UtilisateurBouchon implements IUtilisateurDAO
         return null;
     }
 
+    @Override
+    public HashMap<String, String> inscription(Utilisateur utilisateur) {
+        return null;
+    }
+
     private void genererDonnees()
     {
-        Agence agence = new Agence("d", "45", "dfh", 49740, "qsf");
-        AgenceBouchon.getInstance().ajouterAgence(agence);
+        Agence agence = new Agence("d", "45", "dfh", "49000", "qsf");
+        //AgenceBouchon.getInstance().ajouterAgence(agence);
         Utilisateur utilisateur = new Utilisateur("test@gmail.com", "test", "aaa", agence);
         this.utilisateurs.add(utilisateur);
     }

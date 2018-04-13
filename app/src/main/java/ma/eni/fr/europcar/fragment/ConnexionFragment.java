@@ -159,6 +159,7 @@ public class ConnexionFragment extends Fragment
                         Utilisateur utilisateur = new Utilisateur();
                         utilisateur.setEmail(OF.getTextFromEditText(email));
                         utilisateur.setMotDePasse(OF.getTextFromEditText(mot_de_passe));
+                        utilisateur.setToken(OF.getTextFromEditText(token));
                         mListener.inscriptionValider(utilisateur);
                     }
                 }

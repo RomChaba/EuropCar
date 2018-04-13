@@ -1,6 +1,7 @@
 package ma.eni.fr.europcar.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ma.eni.fr.europcar.model.Agence;
@@ -30,23 +31,13 @@ public class AgenceBouchon implements IAgenceDAO
     }
 
     @Override
-    public void ajouterAgence(Agence agence)
+    public Agence getAgenceAvecId(String id)
     {
-        this.agences.add(agence);
-    }
-
-    @Override
-    public Agence getAgenceAvecSiret(String siret)
-    {
-        for (Agence agence : this.agences)
-        {
-            if(agence.getSiret().equals(siret))
-            {
-                return agence;
-            }
-        }
-
         return null;
     }
 
+    @Override
+    public HashMap<String, String> updateAgence(Agence agence, String idUtilisateur) {
+        return null;
+    }
 }

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import ma.eni.fr.europcar.R;
 import ma.eni.fr.europcar.dao.UtilisateurBouchon;
 import ma.eni.fr.europcar.enums.Message;
@@ -24,10 +26,9 @@ import ma.eni.fr.europcar.utils.OF;
 
 public class ParametresAgenceActivity extends AppCompatActivity implements ParametresAgenceFragment.ParametresListener
 {
-    ParametresAgenceFragment fragment;
-    AgenceService agenceService;
-    UtilisateurService utilisateurService;
-    Utilisateur utilisateur;
+    private ParametresAgenceFragment fragment;
+    private AgenceService agenceService;
+    private Agence agence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,14 +42,10 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
     {
         super.onResume();
 
-        this.agenceService = new AgenceService(this);
         fragment = (ParametresAgenceFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_parametres_agence);
-
-        // Récupération de l'utilisateur en cours
-        this.utilisateurService = new UtilisateurService(this);
-        SharedPreferences sharedPreferences = this.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
-        int idUtilisateur = sharedPreferences.getInt("idUtilisateur", -1);
-        this.utilisateur = utilisateurService.getUtilisateurAvecId(idUtilisateur);
+        this.agenceService = new AgenceService(this);
+        AgenceAsynkTask task = new AgenceAsynkTask(this);
+        task.execute();
     }
 
     @Override
@@ -58,11 +55,40 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         task.execute(agence);
     }
 
+    private class AgenceAsynkTask extends AsyncTask<String, Void, Void>
+    {
+        private Context context;
+
+        public AgenceAsynkTask(Context context)
+        {
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings)
+        {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+            String idAgence = sharedPreferences.getString("idAgence", "");
+            agence = agenceService.getAgenceAvecId(idAgence);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+            fragment.refreshAgence(agence);
+        }
+    }
+
     private class ParametresAgenceAsyncTask extends AsyncTask<Agence, Void, Void>
     {
         private Context context;
-        private TypeErreur resultat;
+        private HashMap<String, String> resultat;
         private Agence agence;
+
 
         public ParametresAgenceAsyncTask(Context context)
         {
@@ -73,16 +99,10 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         protected Void doInBackground(Agence... agences)
         {
             this.agence = agences[0];
-            this.resultat = agenceService.ajouter(agence);
 
-            if(TypeErreur.OK.equals(resultat))
-            {
-                if(utilisateur != null)
-                {
-                    utilisateur.setAgence(agence);
-                    utilisateurService.updateUtilisateur(utilisateur);
-                }
-            }
+            SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+            String idUtilisateur = sharedPreferences.getString("idUtilisateur", "");
+            resultat = agenceService.updateAgence(this.agence, idUtilisateur);
 
             return null;
         }
@@ -98,9 +118,9 @@ public class ParametresAgenceActivity extends AppCompatActivity implements Param
         {
             super.onPostExecute(aVoid);
 
-            if(!TypeErreur.OK.equals(resultat))
+            if(this.resultat.containsKey("error") && !this.resultat.get("error").isEmpty())
             {
-                Toast.makeText(context, OF.getStringByName(context, resultat), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, this.resultat.get("error"), Toast.LENGTH_LONG).show();
             }
             else
             {

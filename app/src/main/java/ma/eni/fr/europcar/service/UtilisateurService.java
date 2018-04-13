@@ -26,18 +26,9 @@ public class UtilisateurService
         this.utilisateurHTTP = new UtilisateurHTTP(this.context);
     }
 
-    public TypeErreur inscription(Utilisateur utilisateur)
+    public HashMap<String, String> inscription(Utilisateur utilisateur)
     {
-        if(UtilisateurBouchon.getInstance().getUtilisateurAvecEmail(utilisateur.getEmail()) != null)
-        {
-            return TypeErreur.EMAIL_EXISTE_DEJA;
-        }
-        else
-        {
-            UtilisateurBouchon.getInstance().ajouterUtilisateur(utilisateur);
-        }
-
-        return TypeErreur.OK;
+        return this.utilisateurHTTP.inscription(utilisateur);
     }
 
     public HashMap<String, String> connexion(Utilisateur utilisateur)

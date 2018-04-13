@@ -106,7 +106,7 @@ public class ConnexionActivity extends AppCompatActivity implements ConnexionFra
                 SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("idUtilisateur", this.resultat.get("userID"));
-                editor.putString("agenceID", this.resultat.get("userID"));
+                editor.putString("idAgence", this.resultat.get("agenceID"));
                 editor.commit();
 
                 Toast.makeText(context, OF.getStringByName(context, Message.CONNEXION_REUSSIE), Toast.LENGTH_LONG).show();

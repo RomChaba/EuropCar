@@ -27,6 +27,7 @@ public class ParametresAgenceFragment extends Fragment
     private EditText codePostal;
     private EditText ville;
     private Button modifier;
+    private Agence agence;
 
     public ParametresAgenceFragment()
     {
@@ -41,6 +42,11 @@ public class ParametresAgenceFragment extends Fragment
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void refreshAgence(Agence agence)
+    {
+        this.agence = agence;
     }
 
     @Override
@@ -127,11 +133,10 @@ public class ParametresAgenceFragment extends Fragment
                 {
                     if(mListener != null)
                     {
-                        Agence agence = new Agence();
                         agence.setRaisonSociale(OF.getTextFromEditText(raisonSociale));
                         agence.setSiret(OF.getTextFromEditText(siret));
                         agence.setVoie(OF.getTextFromEditText(voie));
-                        agence.setCodePostal(Integer.parseInt(OF.getTextFromEditText(codePostal)));
+                        agence.setCodePostal(OF.getTextFromEditText(codePostal));
                         agence.setVille(OF.getTextFromEditText(ville));
                         mListener.parametresAgenceValide(agence);
                     }
